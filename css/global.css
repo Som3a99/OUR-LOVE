@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@200;300;400&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: #0A0808;
+  font-family: 'Inter', sans-serif;
+  color: #F2E9E4;
+  overflow: hidden;
+}
+
+.scene-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.scene-content.active {
+  opacity: 1;
+}
+
+.scene-img {
+  max-width: 80%;
+  max-height: 55vh;  /* تقليل الارتفاع */
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+  border: 1px solid rgba(212,178,140,0.2);
+  filter: blur(3px);
+  transition: filter 3s ease, opacity 2s ease;
+  opacity: 0;
+  margin: 1rem 0;
+}
+.scene-img.loaded {
+  opacity: 1;
+  filter: blur(0);
+}
+
+.scene-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  color: #F2E9E4;
+  text-align: center;
+  opacity: 0;
+  white-space: pre-line;
+  line-height: 2.2;
+  position: relative;  /* يضمن ظهوره */
+  margin: 0.5rem 0;
+}
+
+.scene-location {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: #b8a082;
+  opacity: 0;
+  margin-top: 0.5rem;
+  direction: ltr;
+}
+
+.next-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  color: #D4B28C;
+  opacity: 0;
+  margin-top: 1rem;
+  direction: ltr;
+}
+
+/* ... (باقي الأنماط كما هي) ... */
+
+.scene-copy {
+  background: linear-gradient(to top, rgba(10,8,8,0.7) 0%, rgba(10,8,8,0) 80%);
+  padding: 2rem 1rem 1rem;
+  border-radius: 0 0 8px 8px;
+}
+
+/* تعديل بسيط لضمان ظهور النص بشكل أنيق */
+.scene-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  color: #F2E9E4;
+  text-align: center;
+  opacity: 0;
+  white-space: pre-line;
+  line-height: 2.2;
+  margin: 0.5rem 0;
+}
