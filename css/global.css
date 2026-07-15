@@ -1,11 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@200;300;400&display=swap');
 
 * { margin:0; padding:0; box-sizing:border-box; }
+html, body {
+  overflow: hidden;
+  height: 100%;
+}
 body {
   background: #0A0808;
   font-family: 'Inter', sans-serif;
   color: #F2E9E4;
   overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  -webkit-user-drag: none;
+  -user-drag: none;
+  -webkit-touch-callout: none;
 }
 
 .scene-content {
@@ -14,6 +27,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  height: 100dvh;
   padding: 2rem;
   opacity: 0;
   transition: opacity 1s ease;
@@ -22,9 +36,14 @@ body {
   opacity: 1;
 }
 
+.image-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .scene-img {
   max-width: 80%;
-  max-height: 55vh;  /* تقليل الارتفاع */
+  max-height: 55vh;
   object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.7);
@@ -37,18 +56,6 @@ body {
 .scene-img.loaded {
   opacity: 1;
   filter: blur(0);
-}
-
-.scene-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
-  color: #F2E9E4;
-  text-align: center;
-  opacity: 0;
-  white-space: pre-line;
-  line-height: 2.2;
-  position: relative;  /* يضمن ظهوره */
-  margin: 0.5rem 0;
 }
 
 .scene-location {
@@ -69,22 +76,24 @@ body {
   direction: ltr;
 }
 
-/* ... (باقي الأنماط كما هي) ... */
-
+/* الكلام يعيش تحت الصورة، في مساحته الخاصة — لا يغطي الوجه ولا يحتاج ظلًا فوق الصورة */
 .scene-copy {
-  background: linear-gradient(to top, rgba(10,8,8,0.7) 0%, rgba(10,8,8,0) 80%);
-  padding: 2rem 1rem 1rem;
-  border-radius: 0 0 8px 8px;
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  min-height: 3.4em;
+  margin: 1.6rem auto 0;
+  text-align: center;
 }
 
-/* تعديل بسيط لضمان ظهور النص بشكل أنيق */
 .scene-text {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-size: clamp(1.3rem, 3.4vw, 1.9rem);
   color: #F2E9E4;
   text-align: center;
   opacity: 0;
   white-space: pre-line;
-  line-height: 2.2;
-  margin: 0.5rem 0;
+  line-height: 1.7;
+  position: absolute;
+  top: 0; left: 0; right: 0;
 }

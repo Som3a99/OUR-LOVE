@@ -1,33 +1,29 @@
 const Transition = (function() {
-  function loadScene(url, container) {
-    container.style.display = 'block';
-    container.innerHTML = '';
-    const loader = document.createElement('div');
-    loader.style.color = '#D4B28C';
-    loader.style.textAlign = 'center';
-    loader.style.marginTop = '40vh';
-    loader.style.fontSize = '2rem';
-    loader.textContent = '✦';
-    container.appendChild(loader);
+  const cache = {};
 
-    fetch(url)
-      .then(res => res.text())
+  // تحميل مسبق وصامت للمشهد التالي (نص HTML فقط)، دون عرضه أو تشغيل سكربتاته بعد
+  function preload(url) {
+    if (!cache[url]) {
+      cache[url] = fetch(url).then(res => res.text());
+    }
+    return cache[url];
+  }
+
+  // كشف المشهد فعليًا: يُستدعى فقط في لحظة الانتقال السينمائي
+  function loadScene(url, container, onReady) {
+    preload(url)
       .then(html => {
         container.innerHTML = html;
-        // ننتظر قليلاً حتى يتم بناء DOM ثم نشغل السكربت الخاص بالمشهد
-        setTimeout(() => {
+        requestAnimationFrame(() => {
           executeSceneScripts(container);
           container.querySelector('.scene-content')?.classList.add('active');
-        }, 100);
+          if (typeof onReady === 'function') onReady();
+        });
       })
-      .catch(err => {
-        container.innerHTML = '<p style="color:red;">تعذر تحميل المشهد.</p>';
-        console.error(err);
-      });
+      .catch(err => console.error(err));
   }
 
   function executeSceneScripts(container) {
-    // البحث عن وسوم script داخل المحتوى وتنفيذها
     const scripts = container.querySelectorAll('script');
     scripts.forEach(script => {
       const newScript = document.createElement('script');
@@ -37,10 +33,9 @@ const Transition = (function() {
         newScript.textContent = script.textContent;
       }
       document.body.appendChild(newScript);
-      // إزالة بعد التنفيذ (اختياري)
       newScript.remove();
     });
   }
 
-  return { loadScene };
+  return { loadScene, preload };
 })();

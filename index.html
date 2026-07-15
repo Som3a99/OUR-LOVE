@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>It Was Always You</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0808'/%3E%3Ctext x='16' y='22' font-size='20' text-anchor='middle' fill='%23D4B28C'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="css/global.css">
   <style>
     /* نجوم العتبة */
@@ -14,7 +15,7 @@
     }
     #thresholdScene {
       position: fixed; top:0; left:0;
-      width: 100%; height: 100vh;
+      width: 100%; height: 100vh; height: 100dvh;
       z-index: 20;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
@@ -70,12 +71,13 @@
       color: #b8a082;
       letter-spacing: 0.05em; direction: ltr;
     }
-    /* حاوية المشاهد */
+    /* حاوية المشاهد — تبقى في مكانها دومًا وتُكشف بمذاب لا بقطع */
     #sceneContainer {
       position: fixed; top:0; left:0;
-      width: 100%; height: 100vh;
+      width: 100%; height: 100vh; height: 100dvh;
       z-index: 40;
-      display: none;
+      opacity: 0;
+      pointer-events: none;
       background: #0A0808;
     }
   </style>
@@ -142,13 +144,20 @@
       const transitionInfo = document.getElementById('transitionInfo');
       let passed = false;
 
+      const sceneContainer = document.getElementById('sceneContainer');
+
       beginBtn.addEventListener('click', ()=>{
         if(passed) return;
         passed = true;
-        gsap.to(['#beginBtn','#text2','#symbol'],{opacity:0,duration:0.5,ease:'power2.in'});
+        gsap.to(['#beginBtn','#text2','#symbol'],{opacity:0,duration:0.9,ease:'power2.inOut'});
 
-        // تشغيل موسيقى العتبة (ستستمر في Scene 01)
+        // تشغيل موسيقى العتبة (ستستمر بلا انقطاع خلال Scene 01)
         AudioManager.playThreshold();
+
+        // تحميل صامت للمشهد الأول مبكرًا جدًا، حتى يكون جاهزًا تمامًا
+        // قبل لحظة الكشف — فلا يظهر أي "قطع" أو مؤشر تحميل أبدًا
+        Transition.preload('scenes/scene01.html');
+        (new Image()).src = 'assets/images/nasa-first.jpeg';
 
         setTimeout(()=>{
           gsap.to({v:0},{v:1,duration:3,ease:'power2.in',onUpdate:function(){speedMul=this.targets()[0].v*5;},onComplete:()=>{
@@ -156,13 +165,18 @@
               setTimeout(() => {
                 gsap.to(transitionInfo,{opacity:1,duration:2.2,ease:'power2.out',onComplete:()=>{
                   setTimeout(() => {
-                    gsap.to(transitionInfo,{opacity:0,duration:1});
-                    document.getElementById('thresholdScene').style.display = 'none';
-                    // تحميل المشهد الأول (لا تتوقف الموسيقى هنا)
-                    Transition.loadScene('scenes/scene01.html', document.getElementById('sceneContainer'));
-                  }, 2500);
+                    // لحظة الانتقال: المشهد جاهز بالفعل (preload)، فنكشفه بمذاب
+                    // متزامن مع خفوت التاريخ — ذاكرة واحدة متصلة، بلا قطع مشهدي
+                    Transition.loadScene('scenes/scene01.html', sceneContainer, () => {
+                      gsap.to(transitionInfo,{opacity:0,duration:2.6,ease:'power2.inOut'});
+                      gsap.to(sceneContainer,{opacity:1,duration:2.6,ease:'power2.inOut',onComplete:()=>{
+                        document.getElementById('thresholdScene').style.display = 'none';
+                        sceneContainer.style.pointerEvents = 'auto';
+                      }});
+                    });
+                  }, 2800);
                 }});
-              }, 1000);
+              }, 1200);
             }});
           }});
         }, 400);

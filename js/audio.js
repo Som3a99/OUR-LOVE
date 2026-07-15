@@ -18,22 +18,26 @@ const AudioManager = (function() {
     } catch(e) {}
   }
 
-  function playSnippet(soundKey, start, duration, volume = 0.18) {
+  function playSnippet(soundKey, start, duration, volume = 0.18, fadeIn = 2500) {
     stop();
     try {
       const sound = new Howl({
         src: [`assets/audio/${soundKey}.mp3`],
-        sprite: { snippet: [start, duration] },
-        volume: volume,
+        // loop=true كضمان: الذكرى لا يجب أن تُقطع صوتيًا مهما طال المشهد
+        sprite: { snippet: [start, duration, true] },
+        volume: 0,
         preload: true,
       });
       currentId = sound.play('snippet');
+      sound.fade(0, volume, fadeIn, currentId);
       currentMusic = sound;
     } catch(e) {}
   }
 
   function playThreshold() {
-    playSnippet('threshold', 18000, 54000, 0.18);
+    // مدة أطول بأمان من طول Threshold + Scene 01 مجتمعين، وloop احتياطي
+    // حتى لا تتوقف الموسيقى أبدًا قبل أن يقرر المشهد نفسه أن يخفتها
+    playSnippet('threshold', 18000, 90000, 0.18, 2500);
   }
 
   function stop() {

@@ -1,19 +1,20 @@
-<div class="scene-content" style="justify-content: flex-start; padding-top: 5vh;">
+<div class="scene-content" style="justify-content: flex-start; padding-top: 6vh;">
   <!-- التاريخ والمكان فوق الصورة -->
   <div class="scene-location" id="loc" style="margin-top:0;">6 October 2023 · NASA Space Apps Cairo</div>
-  
-  <!-- حاوية الصورة + النص overlay -->
-  <div class="image-wrapper" style="position: relative; display: inline-block; margin-top: 1rem;">
-    <img src="assets/images/nasa-first.jpeg" alt="النظرة الأولى" class="scene-img" id="img" style="max-height:55vh;" onerror="this.style.display='none';">
-    <!-- النصوص فوق الصورة -->
-    <div class="scene-copy" style="position: absolute; bottom: 4%; left: 50%; transform: translateX(-50%); width: 85%; text-align: center;">
-      <div class="scene-text" id="line1">I didn't know your name.</div>
-      <div class="scene-text" id="line2">I didn't know your story.</div>
-      <div class="scene-text" id="line3">But somehow...</div>
-      <div class="scene-text" id="line4">I remembered your face.</div>
-    </div>
+
+  <!-- الصورة وحدها، نظيفة بلا أي طبقة فوقها -->
+  <div class="image-wrapper">
+    <img src="assets/images/nasa-first.jpeg" alt="النظرة الأولى" class="scene-img" id="img" style="max-height:46vh;" onerror="this.style.display='none';">
   </div>
-  
+
+  <!-- النصوص تحت الصورة، تكمّلها ولا تغطيها -->
+  <div class="scene-copy" id="copy">
+    <div class="scene-text" id="line1">I didn't know your name.</div>
+    <div class="scene-text" id="line2">I didn't know your story.</div>
+    <div class="scene-text" id="line3">But somehow...</div>
+    <div class="scene-text" id="line4">I remembered your face.</div>
+  </div>
+
   <div class="next-date" id="next">May 2024</div>
 </div>
 
@@ -21,7 +22,7 @@
   (function() {
     // موسيقى العتبة ما زالت مستمرة، لا نلمسها هنا
 
-    const tl = gsap.timeline({ delay: 0.5 });
+    const tl = gsap.timeline({ delay: 0.5, defaults: { ease: 'power2.inOut' } });
 
     // --- التاريخ ---
     tl.to('#loc', { opacity: 1, duration: 1.5 }, '+=1');
@@ -49,7 +50,7 @@
     tl.to('#line4', { opacity: 1, duration: 1.8 }, '+=3.5');
     tl.to('#line3', { opacity: 0, duration: 0.8 }, '-=0.8');
 
-    // --- الجملة الأخيرة تبقى 6 ثوانٍ فوق الصورة ---
+    // --- الجملة الأخيرة تبقى 6 ثوانٍ ---
     tl.to({}, { duration: 6 });
 
     // --- اختفاء الجملة الأخيرة ---
