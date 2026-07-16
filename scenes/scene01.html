@@ -1,10 +1,10 @@
-<div class="scene-content" style="justify-content: flex-start; padding-top: 6vh;">
+<div class="scene-content" style="justify-content: flex-start; padding-top: 4vh;">
   <!-- التاريخ والمكان فوق الصورة -->
   <div class="scene-location" id="loc" style="margin-top:0;">6 October 2023 · NASA Space Apps Cairo</div>
 
   <!-- الصورة وحدها، نظيفة بلا أي طبقة فوقها -->
   <div class="image-wrapper">
-    <img src="assets/images/nasa-first.jpeg" alt="النظرة الأولى" class="scene-img" id="img" style="max-height:46vh;" onerror="this.style.display='none';">
+    <img src="assets/images/nasa-first.jpeg" alt="النظرة الأولى" class="scene-img" id="img" style="max-height:58vh;" onerror="this.style.display='none';">
   </div>
 
   <!-- النصوص تحت الصورة، تكمّلها ولا تغطيها -->
@@ -21,6 +21,13 @@
 <script>
   (function() {
     // موسيقى العتبة ما زالت مستمرة، لا نلمسها هنا
+
+    // تحميل صامت لـ Scene02 مبكرًا — نفس تقنية Threshold → Scene01،
+    // حتى يكون المشهد التالي جاهزًا تمامًا لحظة السواد، بلا أي تأخير أو قطع
+    if (typeof Transition !== 'undefined') {
+      Transition.preload('scenes/scene02.html');
+    }
+    (new Image()).src = 'assets/images/gift-placeholder.svg';
 
     const tl = gsap.timeline({ delay: 0.5, defaults: { ease: 'power2.inOut' } });
 
@@ -62,80 +69,18 @@
     // --- Fade out الصورة ---
     tl.to('#img', { opacity: 0, duration: 1.8, ease: 'power2.in' }, '+=0.5');
 
-    // --- عند اختفاء الصورة (سواد) نبدأ تلاشي الموسيقى ---
-    tl.call(() => {
-      // بدء fadeOut للموسيقى على مدى 6 ثوانٍ
-      AudioManager.fadeOut(6000);
-    });
+    // ملاحظة: الموسيقى لا تُلمس هنا أبدًا.
+    // Threshold + Scene01 + Scene02 ذكرى واحدة متصلة — نفس الـ Theme يكمل بلا انقطاع.
+    // أول تغيير حقيقي للموسيقى سيكون لاحقًا عند "غلبني الشوق"، وليس هنا.
 
-    // --- سواد مع موسيقى متلاشية: انتظار 3 ثوانٍ قبل ظهور التاريخ ---
+    // --- سواد: انتظار 3 ثوانٍ قبل ظهور التاريخ ---
     tl.to({}, { duration: 3 });
 
-    // --- ظهور May 2024 ---
+    // --- ظهور May 2024 (جسر إلى Scene02، تمامًا كما فعل Threshold مع Scene01) ---
     tl.to('#next', { opacity: 1, duration: 1.5 });
     tl.to('#next', { opacity: 0, delay: 2.5, duration: 1 });
 
-    // --- جاهزون للمشهد التالي ---
-    tl.call(() => {
-      console.log('🎬 المشهد الأول انتهى والموسيقى تلاشت. الآن يمكن بدء Scene 02.');
-      // مستقبلاً: AudioManager.play('scene02', 0.18); 
-      // Transition.loadScene('scenes/scene02.html', document.getElementById('sceneContainer'));
-    });
-  })();
-</script>
-
-<div class="scene-content" style="justify-content: flex-start; padding-top: 6vh;">
-  <div class="scene-location" id="loc" style="margin-top:0;">6 October 2023 · NASA Space Apps Cairo</div>
-  <div class="image-wrapper">
-    <img src="assets/images/nasa-first.jpeg" alt="النظرة الأولى" class="scene-img" id="img" style="max-height:46vh;" onerror="this.style.display='none';">
-  </div>
-  <div class="scene-copy" id="copy">
-    <div class="scene-text" id="line1">I didn't know your name.</div>
-    <div class="scene-text" id="line2">I didn't know your story.</div>
-    <div class="scene-text" id="line3">But somehow...</div>
-    <div class="scene-text" id="line4">I remembered your face.</div>
-  </div>
-  <div class="next-date" id="next">May 2024</div>
-</div>
-
-<script>
-  (function() {
-    const tl = gsap.timeline({ delay: 0.5, defaults: { ease: 'power2.inOut' } });
-
-    tl.to('#loc', { opacity: 1, duration: 1.5 }, '+=1');
-    tl.to('#loc', { opacity: 0, delay: 2.5, duration: 1 }, '-=0.2');
-
-    tl.to('#img', {
-      opacity: 1, scale: 1.0, filter: 'blur(0px)',
-      duration: 8, ease: 'power2.out'
-    }, '-=0.8');
-    tl.call(() => document.getElementById('img').classList.add('loaded'));
-
-    tl.to('#line1', { opacity: 1, duration: 1.5 }, '+=2');
-
-    tl.to('#line2', { opacity: 1, duration: 1.5 }, '+=3.5');
-    tl.to('#line1', { opacity: 0, duration: 0.8 }, '-=1.0');
-
-    tl.to('#line3', { opacity: 1, duration: 1.2 }, '+=3.8');
-    tl.to('#line2', { opacity: 0, duration: 0.8 }, '-=0.8');
-
-    tl.to('#line4', { opacity: 1, duration: 1.8 }, '+=3.5');
-    tl.to('#line3', { opacity: 0, duration: 0.8 }, '-=0.8');
-
-    tl.to({}, { duration: 6 });
-
-    tl.to('#line4', { opacity: 0, duration: 1.2 }, '+=0.5');
-    tl.to({}, { duration: 3 });
-
-    tl.to('#img', { opacity: 0, duration: 1.8, ease: 'power2.in' }, '+=0.5');
-
-    // --- لا نلمس الموسيقى ---
-    tl.to({}, { duration: 3 });
-
-    tl.to('#next', { opacity: 1, duration: 1.5 });
-    tl.to('#next', { opacity: 0, delay: 2.5, duration: 1 });
-
-    // ✨ هنا الانتقال للمشهد الثاني
+    // --- الانتقال إلى Scene02: يحدث فقط والشاشة سوداء بالكامل، فلا يُلاحظ أي قطع ---
     tl.call(() => {
       const container = document.getElementById('sceneContainer');
       Transition.loadScene('scenes/scene02.html', container);

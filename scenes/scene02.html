@@ -1,40 +1,43 @@
-<div class="scene-content" style="justify-content: flex-start; padding-top: 6vh;">
+<div class="scene-content" style="justify-content: flex-start; padding-top: 4vh;">
+  <!-- التاريخ والمكان -->
   <div class="scene-location" id="loc" style="margin-top:0;">May 2024 · VEP Online</div>
+
+  <!-- الهدية هي بطلة المشهد، وليست صورتها -->
   <div class="image-wrapper">
-    <img src="assets/images/gift.jpg" alt="الهدية" class="scene-img" id="img" style="max-height:46vh;" onerror="this.style.display='none';">
-    <div id="imgFallback" style="display:none; width:280px; height:200px; background:#1a1715; border-radius:8px; border:1px solid #D4B28C; align-items:center; justify-content:center; color:#D4B28C; font-family:'Cormorant Garamond',serif; font-size:1.5rem;">🎁</div>
+    <img src="assets/images/gift.png" alt="الهدية" class="scene-img" id="img" style="max-height:58vh;" onerror="this.style.display='none';">
   </div>
+
+  <!-- النصوص تحت الصورة -->
   <div class="scene-copy" id="copy">
     <div class="scene-text" id="line1">I couldn't believe it.</div>
     <div class="scene-text" id="line2">It was you.</div>
     <div class="scene-text" id="line3">The girl I never forgot.</div>
-    <div class="scene-text" id="line4">This time... life gave us a reason to talk.</div>
+    <div class="scene-text" id="line4">This time...<br>life gave us a reason to talk.</div>
   </div>
-  <div class="next-date" id="next">Future University</div>
 </div>
 
 <script>
   (function() {
-    const img = document.getElementById('img');
-    const fallback = document.getElementById('imgFallback');
-
-    img.addEventListener('error', function() {
-      this.style.display = 'none';
-      fallback.style.display = 'flex';
-      fallback.id = 'img';
-    });
+    // الموسيقى مستمرة من Threshold + Scene01 بلا أي لمسة هنا —
+    // Act I كله ذكرى واحدة، نفس الـ Theme، بلا Restart وبلا Crossfade.
 
     const tl = gsap.timeline({ delay: 0.5, defaults: { ease: 'power2.inOut' } });
 
+    // --- التاريخ والمكان ---
     tl.to('#loc', { opacity: 1, duration: 1.5 }, '+=1');
     tl.to('#loc', { opacity: 0, delay: 2.5, duration: 1 }, '-=0.2');
 
+    // --- الهدية (Fade + Unblur) ---
     tl.to('#img', {
-      opacity: 1, scale: 1.0, filter: 'blur(0px)',
-      duration: 8, ease: 'power2.out'
+      opacity: 1,
+      scale: 1.0,
+      filter: 'blur(0px)',
+      duration: 8,
+      ease: 'power2.out'
     }, '-=0.8');
-    tl.call(() => document.getElementById('img')?.classList?.add('loaded'));
+    tl.call(() => document.getElementById('img').classList.add('loaded'));
 
+    // --- ظهور الجمل بالتتابع مع إخفاء السابقة ---
     tl.to('#line1', { opacity: 1, duration: 1.5 }, '+=2');
 
     tl.to('#line2', { opacity: 1, duration: 1.5 }, '+=3.5');
@@ -46,21 +49,29 @@
     tl.to('#line4', { opacity: 1, duration: 1.8 }, '+=3.5');
     tl.to('#line3', { opacity: 0, duration: 0.8 }, '-=0.8');
 
+    // --- الجملة الأخيرة تبقى 6 ثوانٍ ---
     tl.to({}, { duration: 6 });
 
+    // --- اختفاء الجملة الأخيرة ---
     tl.to('#line4', { opacity: 0, duration: 1.2 }, '+=0.5');
+
+    // --- الصورة وحدها 3 ثوانٍ ---
     tl.to({}, { duration: 3 });
 
+    // --- Fade out الصورة ---
     tl.to('#img', { opacity: 0, duration: 1.8, ease: 'power2.in' }, '+=0.5');
 
+    // ملاحظة: لا لمسة للموسيقى هنا أيضًا — لسه في Act I.
+    // أول تغيير حقيقي للـ Theme هيبقى عند مشهد "غلبني الشوق"، مش هنا.
+
+    // --- سواد: نهاية المشهد حتى يُحسم Scene03 ---
     tl.to({}, { duration: 3 });
 
-    tl.to('#next', { opacity: 1, duration: 1.5 });
-    tl.to('#next', { opacity: 0, delay: 2.5, duration: 1 });
-
     tl.call(() => {
-      console.log('🎬 المشهد الثاني انتهى. جاهزون لـ Scene 03.');
-      // مستقبلاً: الانتقال إلى Scene 03
+      console.log('🎬 Scene 02 انتهى. الموسيقى ما زالت مستمرة. Scene 03 لم يُبنَ بعد.');
+      // مستقبلاً، بنفس التقنية:
+      // Transition.preload('scenes/scene03.html'); // يُستدعى مبكرًا فوق قبل نهاية التايملاين
+      // Transition.loadScene('scenes/scene03.html', document.getElementById('sceneContainer'));
     });
   })();
 </script>
