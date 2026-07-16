@@ -70,13 +70,19 @@
 
     // ملاحظة: لا لمسة للموسيقى هنا أيضًا — لسه في Act I.
     // أول تغيير حقيقي للـ Theme هيبقى عند مشهد "غلبني الشوق"، مش هنا.
-
     // --- سواد: نهاية المشهد حتى يُحسم Scene03 ---
     tl.to({}, { duration: 3 });
 
     tl.call(() => {
       const container = document.getElementById('sceneContainer');
-      Transition.loadScene('scenes/scene03.html', container);
+      Transition.showDateCard({
+        month: 'July',
+        year: '2024',
+        location1: 'NASA Space Apps Cairo',
+        location2: 'Future University'
+      }, () => {
+        Transition.loadScene('scenes/scene03.html', container);
+      });
     });
   })();
 </script>

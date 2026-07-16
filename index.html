@@ -56,7 +56,7 @@
       position: fixed; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
-      z-index: 30; opacity: 0; pointer-events: none;
+      z-index: 50; opacity: 0; pointer-events: none;
     }
     .date-stack {
       font-family: 'Cormorant Garamond', serif;
@@ -141,7 +141,6 @@
       tl.to('#beginBtn',{opacity:1,y:0,duration:1.3,delay:2.8},'btn');
 
       const beginBtn = document.getElementById('beginBtn');
-      const transitionInfo = document.getElementById('transitionInfo');
       let passed = false;
 
       const sceneContainer = document.getElementById('sceneContainer');
@@ -163,19 +162,21 @@
           gsap.to({v:0},{v:1,duration:3,ease:'power2.in',onUpdate:function(){speedMul=this.targets()[0].v*5;},onComplete:()=>{
             gsap.to(canvas,{opacity:0,duration:1.8,ease:'power2.inOut',onUpdate:()=>{canvasOpacity=canvas.style.opacity;},onComplete:()=>{
               setTimeout(() => {
-                gsap.to(transitionInfo,{opacity:1,duration:2.2,ease:'power2.out',onComplete:()=>{
-                  setTimeout(() => {
-                    // لحظة الانتقال: المشهد جاهز بالفعل (preload)، فنكشفه بمذاب
-                    // متزامن مع خفوت التاريخ — ذاكرة واحدة متصلة، بلا قطع مشهدي
-                    Transition.loadScene('scenes/scene01.html', sceneContainer, () => {
-                      gsap.to(transitionInfo,{opacity:0,duration:2.6,ease:'power2.inOut'});
-                      gsap.to(sceneContainer,{opacity:1,duration:2.6,ease:'power2.inOut',onComplete:()=>{
-                        document.getElementById('thresholdScene').style.display = 'none';
-                        sceneContainer.style.pointerEvents = 'auto';
-                      }});
-                    });
-                  }, 2800);
-                }});
+                Transition.showDateCard({
+                  day: '6',
+                  month: 'October',
+                  year: '2023',
+                  location1: 'NASA Space Apps Cairo',
+                  location2: 'AUC — New Cairo'
+                }, () => {
+                  // لحظة الانتقال: المشهد جاهز بالفعل (preload)، فنكشفه بمذاب
+                  Transition.loadScene('scenes/scene01.html', sceneContainer, () => {
+                    gsap.to(sceneContainer,{opacity:1,duration:2.6,ease:'power2.inOut',onComplete:()=>{
+                      document.getElementById('thresholdScene').style.display = 'none';
+                      sceneContainer.style.pointerEvents = 'auto';
+                    }});
+                  });
+                });
               }, 1200);
             }});
           }});

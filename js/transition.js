@@ -23,6 +23,42 @@ const Transition = (function() {
       .catch(err => console.error(err));
   }
 
+  function showDateCard(info, onComplete) {
+    const card = document.getElementById('transitionInfo');
+    if (!card) {
+      if (typeof onComplete === 'function') onComplete();
+      return;
+    }
+
+    const dateStack = card.querySelector('.date-stack');
+    const locationText = card.querySelector('.location-text');
+    const dateLines = [info.day, info.month, info.year].filter(Boolean);
+    const locationLines = [info.location1, info.location2].filter(Boolean);
+
+    dateStack.innerHTML = dateLines.join('<br>');
+    locationText.innerHTML = locationLines.join('<br>');
+
+    gsap.killTweensOf(card);
+    gsap.set(card, { opacity: 0 });
+    gsap.to(card, {
+      opacity: 1,
+      duration: 2.2,
+      ease: 'power2.out',
+      onComplete: () => {
+        setTimeout(() => {
+          gsap.to(card, {
+            opacity: 0,
+            duration: 2.6,
+            ease: 'power2.inOut',
+            onComplete: () => {
+              if (typeof onComplete === 'function') onComplete();
+            }
+          });
+        }, 2800);
+      }
+    });
+  }
+
   function executeSceneScripts(container) {
     const scripts = container.querySelectorAll('script');
     scripts.forEach(script => {
@@ -37,5 +73,5 @@ const Transition = (function() {
     });
   }
 
-  return { loadScene, preload };
+  return { loadScene, preload, showDateCard };
 })();

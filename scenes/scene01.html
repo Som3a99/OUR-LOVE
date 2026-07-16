@@ -14,8 +14,6 @@
     <div class="scene-text" id="line3">But somehow...</div>
     <div class="scene-text" id="line4">I remembered your face.</div>
   </div>
-
-  <div class="next-date" id="next">May 2024</div>
 </div>
 
 <script>
@@ -76,14 +74,16 @@
     // --- سواد: انتظار 3 ثوانٍ قبل ظهور التاريخ ---
     tl.to({}, { duration: 3 });
 
-    // --- ظهور May 2024 (جسر إلى Scene02، تمامًا كما فعل Threshold مع Scene01) ---
-    tl.to('#next', { opacity: 1, duration: 1.5 });
-    tl.to('#next', { opacity: 0, delay: 2.5, duration: 1 });
-
     // --- الانتقال إلى Scene02: يحدث فقط والشاشة سوداء بالكامل، فلا يُلاحظ أي قطع ---
     tl.call(() => {
       const container = document.getElementById('sceneContainer');
-      Transition.loadScene('scenes/scene02.html', container);
+      Transition.showDateCard({
+        month: 'May',
+        year: '2024',
+        location1: 'VEP Online'
+      }, () => {
+        Transition.loadScene('scenes/scene02.html', container);
+      });
     });
   })();
 </script>
