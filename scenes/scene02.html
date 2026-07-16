@@ -21,6 +21,13 @@
     // الموسيقى مستمرة من Threshold + Scene01 بلا أي لمسة هنا —
     // Act I كله ذكرى واحدة، نفس الـ Theme، بلا Restart وبلا Crossfade.
 
+    // تحميل صامت لـ Scene03 مبكرًا — نفس تقنية Threshold → Scene01 → Scene02،
+    // حتى يكون المشهد التالي جاهزًا تمامًا لحظة السواد، بلا أي تأخير أو قطع
+    if (typeof Transition !== 'undefined') {
+      Transition.preload('scenes/scene03.html');
+    }
+    (new Image()).src = 'assets/images/nasa-2024.jpeg';
+
     const tl = gsap.timeline({ delay: 0.5, defaults: { ease: 'power2.inOut' } });
 
     // --- التاريخ والمكان ---
@@ -68,10 +75,8 @@
     tl.to({}, { duration: 3 });
 
     tl.call(() => {
-      console.log('🎬 Scene 02 انتهى. الموسيقى ما زالت مستمرة. Scene 03 لم يُبنَ بعد.');
-      // مستقبلاً، بنفس التقنية:
-      // Transition.preload('scenes/scene03.html'); // يُستدعى مبكرًا فوق قبل نهاية التايملاين
-      // Transition.loadScene('scenes/scene03.html', document.getElementById('sceneContainer'));
+      const container = document.getElementById('sceneContainer');
+      Transition.loadScene('scenes/scene03.html', container);
     });
   })();
 </script>
