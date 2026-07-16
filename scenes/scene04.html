@@ -31,9 +31,6 @@
   <!-- سطر إغلاق الفصل الأول -->
   <div class="silence-line" id="actClose">Sometimes... life separates people...<br>before bringing them together again.</div>
 
-  <!-- عتبة الفصل الثاني -->
-  <div class="silence-line date-reveal" id="act2date">18 January 2026</div>
-
 </div>
 
 <style>
@@ -147,6 +144,9 @@
   (function() {
     // الموسيقى مستمرة بلا لمسة حتى نهاية الفصل — نفس الـ Theme منذ العتبة.
     // هذا المشهد أبطأ من كل ما قبله عمدًا: صمت، مساحة فارغة، لا دراما.
+    if (typeof Transition !== 'undefined') {
+      Transition.preload('scenes/scene05.html');
+    }
 
     const tl = gsap.timeline({ delay: 1, defaults: { ease: 'power2.inOut' } });
 
@@ -204,15 +204,16 @@
     // --- سواد END OF ACT I ---
     tl.to({}, { duration: 2 });
 
-    // --- عتبة الفصل الثاني: تاريخ فقط، الجمهور يشعر أن سنوات مرّت ---
-    tl.to('#act2date', { opacity: 1, duration: 2 }, '+=0.5');
-    tl.to('#act2date', { opacity: 0, duration: 1.8 }, '+=3');
-
     tl.call(() => {
-      console.log('🎬 Scene 04 وإغلاق الفصل الأول انتهيا. الموسيقى عند صوت شبه صامت. Scene 05 (الفصل الثاني) لم يُبنَ بعد.');
-      // مستقبلاً، بنفس التقنية:
-      // Transition.preload('scenes/scene05.html');
-      // Transition.loadScene('scenes/scene05.html', document.getElementById('sceneContainer'));
-    });
+      const container = document.getElementById('sceneContainer');
+      Transition.showDateCard({
+        day: '18',
+        month: 'January',
+        year: '2026',
+        location1: 'The Longing'
+      }, () => {
+        Transition.loadScene('scenes/scene05.html', container);
+      });
+    }, null, '+=0.5');
   })();
 </script>

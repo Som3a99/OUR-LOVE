@@ -144,6 +144,23 @@
       let passed = false;
 
       const sceneContainer = document.getElementById('sceneContainer');
+      const sceneParam = new URLSearchParams(window.location.search).get('scene');
+
+      if (sceneParam && /^\d+$/.test(sceneParam)) {
+        const sceneNumber = parseInt(sceneParam, 10);
+        if (sceneNumber > 0) {
+          const sceneUrl = `scenes/scene${String(sceneNumber).padStart(2, '0')}.html`;
+          passed = true;
+          tl.kill();
+          canvasOpacity = 0;
+          canvas.style.opacity = 0;
+          document.getElementById('thresholdScene').style.display = 'none';
+          sceneContainer.style.opacity = 1;
+          sceneContainer.style.pointerEvents = 'auto';
+          Transition.loadScene(sceneUrl, sceneContainer);
+          return;
+        }
+      }
 
       beginBtn.addEventListener('click', ()=>{
         if(passed) return;
