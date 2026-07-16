@@ -22,6 +22,12 @@
     // الموسيقى مستمرة من Threshold + Scene01 + Scene02 بلا أي لمسة هنا —
     // Act I كله ذكرى واحدة، نفس الـ Theme، بلا Restart وبلا Crossfade.
 
+    // تحميل صامت لـ Scene04 مبكرًا — نفس تقنية كل انتقال سابق،
+    // حتى يكون المشهد التالي جاهزًا تمامًا لحظة السواد، بلا أي تأخير أو قطع
+    if (typeof Transition !== 'undefined') {
+      Transition.preload('scenes/scene04.html');
+    }
+
     const tl = gsap.timeline({ delay: 0.5, defaults: { ease: 'power2.inOut' } });
 
     // --- التاريخ والمكان ---
@@ -73,10 +79,15 @@
     tl.to({}, { duration: 3 });
 
     tl.call(() => {
-      console.log('🎬 Scene 03 انتهى. الموسيقى ما زالت مستمرة. Scene 04 لم يُبنَ بعد.');
-      // مستقبلاً، بنفس التقنية:
-      // Transition.preload('scenes/scene04.html'); // يُستدعى مبكرًا فوق قبل نهاية التايملاين
-      // Transition.loadScene('scenes/scene04.html', document.getElementById('sceneContainer'));
+      const container = document.getElementById('sceneContainer');
+      Transition.showDateCard({
+        day: '15',
+        month: 'November',
+        year: '2024',
+        location1: 'Last Message'
+      }, () => {
+        Transition.loadScene('scenes/scene04.html', container);
+      });
     });
   })();
 </script>

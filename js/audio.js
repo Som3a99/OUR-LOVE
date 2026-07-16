@@ -56,6 +56,14 @@ const AudioManager = (function() {
     }
   }
 
+  // ليست صمتًا كاملًا — فقط قربًا منه. تُستخدم في نهاية الفصل الأول:
+  // الموسيقى تبقى تعزف، لكن بصوت يكاد لا يُسمع، ليشعر الجمهور بالغياب لا بالانقطاع.
+  function fadeTo(volume = 0.02, duration = 4000) {
+    if (currentMusic) {
+      currentMusic.fade(currentMusic.volume(), volume, duration);
+    }
+  }
+
   // دالة جديدة: crossfade من الموسيقى الحالية إلى مقطع جديد
   function crossfadeTo(newSoundKey, newVolume = 0.15, duration = 4000) {
     if (!currentMusic) {
@@ -88,6 +96,7 @@ const AudioManager = (function() {
     playThreshold,
     stop,
     fadeOut,
+    fadeTo,
     crossfadeTo
   };
 })();

@@ -1,0 +1,218 @@
+<div class="scene-content" style="justify-content: center;">
+
+  <!-- هاتف واقعي، محادثة واتساب حقيقية — لكنها ليست البطلة، الصمت حولها هو البطل -->
+  <div class="wa-wrap" id="waWrap">
+    <div class="wa-header">
+      <span class="wa-back">‹</span>
+      <span class="wa-avatar">♡</span>
+      <div class="wa-headtext">
+        <div class="wa-name">♡</div>
+        <div class="wa-status">last seen today at 7:03 PM</div>
+      </div>
+    </div>
+    <div class="wa-messages">
+      <div class="wa-bubble received"><span dir="rtl" lang="ar">شكرا جدا تعبتك معايا</span><small>6:47 PM</small></div>
+      <div class="wa-bubble sent"><span dir="rtl" lang="ar">العفو يا مريم ولا تعب ولا حاجه ❤️</span><small>6:52 PM <i class="wa-tick">✓✓</i></small></div>
+      <div class="wa-bubble sent"><span dir="rtl" lang="ar">ربنا يوفقك يارب</span><small>6:53 PM <i class="wa-tick">✓✓</i></small></div>
+      <div class="wa-bubble received"><span dir="rtl" lang="ar">ويوفقك كذلك 🤲</span><small>7:03 PM</small></div>
+    </div>
+  </div>
+
+  <!-- الجملتان اللتان تحملان المشهد كله -->
+  <div class="silence-line" id="sl1">We didn't say goodbye.</div>
+  <div class="silence-line" id="sl2">It was simply... the last message.</div>
+
+  <!-- مرور الزمن: كلمات مفردة، بلا شرح، بلا مشهد جديد -->
+  <div class="silence-line" id="pw1">Graduation.</div>
+  <div class="silence-line" id="pw2">Military Service.</div>
+  <div class="silence-line" id="pw3">Work.</div>
+  <div class="silence-line" id="pw4">Life happened.</div>
+
+  <!-- سطر إغلاق الفصل الأول -->
+  <div class="silence-line" id="actClose">Sometimes... life separates people...<br>before bringing them together again.</div>
+
+  <!-- عتبة الفصل الثاني -->
+  <div class="silence-line date-reveal" id="act2date">18 June 2026</div>
+
+</div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500&display=swap');
+
+  /* كل شيء هنا محلي لهذا المشهد فقط — لا لمسة لأي ملف عام */
+  .wa-wrap {
+    width: 100%;
+    max-width: 360px;
+    background: #0b141a;
+    border: 1px solid rgba(212,178,140,0.15);
+    border-radius: 14px;
+    overflow: hidden;
+    opacity: 0;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+  }
+  .wa-header {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.8rem 1rem;
+    background: #1f2c34;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .wa-back {
+    font-size: 1.4rem;
+    color: #d4b28c;
+    line-height: 1;
+  }
+  .wa-avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3a2a22, #6b4a35);
+    display: flex; align-items: center; justify-content: center;
+    color: #f2b6c6; font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .wa-headtext { display: flex; flex-direction: column; }
+  .wa-name { font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #F2E9E4; }
+  .wa-status { font-family: 'Inter', sans-serif; font-size: 0.7rem; color: #8696a0; margin-top: 0.1rem; }
+
+  .wa-messages {
+    padding: 1rem 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    min-height: 180px;
+    justify-content: flex-end;
+  }
+  .wa-bubble {
+    max-width: 78%;
+    padding: 0.5rem 0.7rem 0.35rem;
+    border-radius: 9px;
+    font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.35;
+    color: #E9EDEF;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  .wa-bubble span {
+    direction: rtl;
+    unicode-bidi: plaintext;
+    text-align: right;
+  }
+  .wa-bubble small {
+    align-self: flex-end;
+    font-size: 0.65rem;
+    color: rgba(233,237,239,0.55);
+    margin-top: 0.2rem;
+  }
+  .wa-tick { font-style: normal; color: #53bdeb; }
+  .wa-bubble.received {
+    background: #1f2c34;
+    align-self: flex-start;
+    border-top-left-radius: 2px;
+  }
+  .wa-bubble.sent {
+    background: #005c4b;
+    align-self: flex-end;
+    border-top-right-radius: 2px;
+  }
+
+  /* الجمل الصامتة — تتشارك نفس الحيز، الواحدة تلو الأخرى، ولا تتزاحم أبدًا */
+  .silence-line {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 640px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 4vw, 2.3rem);
+    font-weight: 300;
+    color: #F2E9E4;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    opacity: 0;
+    white-space: pre-line;
+  }
+  .date-reveal {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: #D4B28C;
+    letter-spacing: 0.08em;
+  }
+</style>
+
+<script>
+  (function() {
+    // الموسيقى مستمرة بلا لمسة حتى نهاية الفصل — نفس الـ Theme منذ العتبة.
+    // هذا المشهد أبطأ من كل ما قبله عمدًا: صمت، مساحة فارغة، لا دراما.
+
+    const tl = gsap.timeline({ delay: 1, defaults: { ease: 'power2.inOut' } });
+
+    // --- سواد وسكون قبل ظهور المحادثة، كأننا نتذكرها ببطء ---
+    tl.to('#waWrap', { opacity: 1, duration: 3.5 }, '+=2');
+
+    // --- تُترك المحادثة كما هي، كاملة الظهور دفعة واحدة، بلا سكرول وبلا حركة زائدة ---
+    tl.to('.wa-bubble', { opacity: 1, y: 0, duration: 1.2, stagger: 0.35 }, '-=2.2');
+
+    // --- سكون طويل، بلا تغيير في الموسيقى — هذا هو قلب المشهد ---
+    tl.to({}, { duration: 6 });
+
+    // --- المحادثة تتلاشى ببطء، تاركة الشاشة شبه فارغة ---
+    tl.to('#waWrap', { opacity: 0, duration: 3, ease: 'power2.in' }, '+=1');
+
+    // --- سواد قصير قبل الجملة الأولى ---
+    tl.to('#sl1', { opacity: 1, duration: 1.8 }, '+=2.5');
+    tl.to('#sl1', { opacity: 0, duration: 1.4 }, '+=3.5');
+
+    tl.to('#sl2', { opacity: 1, duration: 1.8 }, '+=1.2');
+    tl.to('#sl2', { opacity: 0, duration: 1.4 }, '+=4');
+
+    // --- سواد قبل مرور الزمن ---
+    tl.to({}, { duration: 2.5 });
+
+    // --- مرور الزمن: كلمة واحدة فواحدة، بلا أي شرح ---
+    tl.to('#pw1', { opacity: 1, duration: 1.2 }, '+=0.3');
+    tl.to('#pw1', { opacity: 0, duration: 1 }, '+=1.8');
+
+    tl.to('#pw2', { opacity: 1, duration: 1.2 }, '+=0.9');
+    tl.to('#pw2', { opacity: 0, duration: 1 }, '+=1.8');
+
+    tl.to('#pw3', { opacity: 1, duration: 1.2 }, '+=0.9');
+    tl.to('#pw3', { opacity: 0, duration: 1 }, '+=1.8');
+
+    tl.to('#pw4', { opacity: 1, duration: 1.2 }, '+=0.9');
+    tl.to('#pw4', { opacity: 0, duration: 1.2 }, '+=2.2');
+
+    // ============================================================
+    // نهاية الفصل الأول — لا ننتقل فورًا لأي مشهد جديد.
+    // سواد كامل 4-5 ثوانٍ، الموسيقى ما زالت تُسمع بهدوء شديد.
+    // ============================================================
+    tl.to({}, { duration: 4.5 });
+
+    // --- الموسيقى تخفت حتى تكاد لا تُسمع — ليست صمتًا كاملًا، بل قرب منه ---
+    tl.call(() => {
+      if (typeof AudioManager !== 'undefined') AudioManager.fadeTo(0.02, 4000);
+    });
+    tl.to({}, { duration: 4 });
+
+    // --- سطر إغلاق الفصل الأول ---
+    tl.to('#actClose', { opacity: 1, duration: 2 }, '+=0.5');
+    tl.to('#actClose', { opacity: 0, duration: 1.8 }, '+=4.5');
+
+    // --- سواد END OF ACT I ---
+    tl.to({}, { duration: 2 });
+
+    // --- عتبة الفصل الثاني: تاريخ فقط، الجمهور يشعر أن سنوات مرّت ---
+    tl.to('#act2date', { opacity: 1, duration: 2 }, '+=0.5');
+    tl.to('#act2date', { opacity: 0, duration: 1.8 }, '+=3');
+
+    tl.call(() => {
+      console.log('🎬 Scene 04 وإغلاق الفصل الأول انتهيا. الموسيقى عند صوت شبه صامت. Scene 05 (الفصل الثاني) لم يُبنَ بعد.');
+      // مستقبلاً، بنفس التقنية:
+      // Transition.preload('scenes/scene05.html');
+      // Transition.loadScene('scenes/scene05.html', document.getElementById('sceneContainer'));
+    });
+  })();
+</script>
