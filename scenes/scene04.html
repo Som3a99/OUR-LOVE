@@ -32,7 +32,7 @@
   <div class="silence-line" id="actClose">Sometimes... life separates people...<br>before bringing them together again.</div>
 
   <!-- عتبة الفصل الثاني -->
-  <div class="silence-line date-reveal" id="act2date">18 June 2026</div>
+  <div class="silence-line date-reveal" id="act2date">18 January 2026</div>
 
 </div>
 
@@ -184,6 +184,9 @@
 
     tl.to('#pw4', { opacity: 1, duration: 1.2 }, '+=0.9');
     tl.to('#pw4', { opacity: 0, duration: 1.2 }, '+=2.2');
+    tl.call(() => {
+      if (typeof AudioManager !== 'undefined') AudioManager.fadeTo(0.03, 6000);
+    });
 
     // ============================================================
     // نهاية الفصل الأول — لا ننتقل فورًا لأي مشهد جديد.
@@ -191,10 +194,7 @@
     // ============================================================
     tl.to({}, { duration: 4.5 });
 
-    // --- الموسيقى تخفت حتى تكاد لا تُسمع — ليست صمتًا كاملًا، بل قرب منه ---
-    tl.call(() => {
-      if (typeof AudioManager !== 'undefined') AudioManager.fadeTo(0.02, 4000);
-    });
+    // --- الموسيقى تظل منخفضة ومستمرة، بلا توقف أو إعادة تشغيل ---
     tl.to({}, { duration: 4 });
 
     // --- سطر إغلاق الفصل الأول ---

@@ -23,22 +23,20 @@ const AudioManager = (function() {
     try {
       const sound = new Howl({
         src: [`assets/audio/${soundKey}.mp3`],
-        // loop=true كضمان: الذكرى لا يجب أن تُقطع صوتيًا مهما طال المشهد
-        sprite: { snippet: [start, duration, true] },
         volume: 0,
+        loop: false,
         preload: true,
       });
-      currentId = sound.play('snippet');
+      currentId = sound.play();
+      sound.seek(start / 1000, currentId);
       sound.fade(0, volume, fadeIn, currentId);
       currentMusic = sound;
     } catch(e) {}
   }
 
   function playThreshold() {
-    // المسار الأصلي طوله ~214 ثانية. نغطي منه أطول جزء ممكن بأمان (من 18 ثانية
-    // لحد قرب النهاية) عشان يغطي Act I بالكامل (Threshold + Scene01 + Scene02 +
-    // مشاهد الفلاش باك القادمة) بلا أي احتياج فعلي لتكرار المقطع. الـ loop يفضل
-    // موجود كضمان أخير فقط، مش كخطة متوقعة.
+    // Act I uses one continuous recording: start at 18s, then let the track play naturally.
+    if (currentMusic) return;
     playSnippet('threshold', 18000, 190000, 0.18, 2500);
   }
 
