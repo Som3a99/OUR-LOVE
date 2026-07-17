@@ -93,6 +93,24 @@ const AudioManager = (function() {
     } catch(e) {}
   }
 
+  // بداية موسيقى جديدة بصوت شبه معدوم يتصاعد ببطء شديد — تُستخدم في بداية Scene08
+  // (نفس فلسفة scheduleElBakhtAutomation، لكن أبسط: لا تلاشي نهائي هنا، فقط بداية ناعمة)
+  function playGradualStart(soundKey, startVolume = 0.02, targetVolume = 0.06, duration = 11000) {
+    stop();
+    try {
+      const sound = new Howl({
+        src: [`assets/audio/${soundKey}.mp3`],
+        volume: 0,
+        loop: false,
+        preload: true,
+      });
+      currentId = sound.play();
+      currentMusic = sound;
+      sound.volume(startVolume, currentId);
+      sound.fade(startVolume, targetVolume, duration, currentId);
+    } catch(e) {}
+  }
+
   function playThreshold() {
     // Act I uses one continuous recording: start at 18s, then let the track play naturally.
     if (currentMusic) return;
@@ -161,10 +179,11 @@ const AudioManager = (function() {
     } catch(e) {}
   }
 
-  return {
+return {
     play,
     playSnippet,
     playThreshold,
+    playGradualStart,
     stop,
     fadeOut,
     fadeTo,
