@@ -19,7 +19,7 @@
   <!-- التردد: لا حوار، لا شاشة كاملة، فقط شريط كتابة صغير يفتح ويتردد ويُغلق -->
   <div class="compose-wrap" id="composeWrap">
     <div class="compose-bar">
-      <span class="compose-text" id="composeText"></span><span class="compose-cursor">|</span>
+      <span class="compose-text" id="composeText"><span class="compose-cursor" id="composeCursor">|</span></span>
     </div>
   </div>
 
@@ -80,11 +80,14 @@
     text-align: right;
     white-space: pre-line;
   }
+  .compose-text::after {
+    content: '';
+  }
   .compose-cursor {
     font-family: 'Inter', sans-serif;
     font-size: 0.92rem;
     color: #8696a0;
-    margin-right: 1px;
+    display: inline;
     animation: waBlink 1s step-end infinite;
   }
   @keyframes waBlink { 50% { opacity: 0; } }
@@ -163,6 +166,14 @@
     // --- حلقة الكتابة والحذف: ثلاث محاولات هادئة، بلا دراما، مجرد تردد طبيعي ---
     function runHesitation(done) {
       const el = document.getElementById('composeText');
+      const cursor = document.getElementById('composeCursor');
+      const textNode = document.createTextNode('');
+      el.insertBefore(textNode, cursor);
+
+      function renderComposeText(text) {
+        textNode.data = text;
+      }
+
       const attempts = [
         { text: 'إزيك يا مريم...', erase: true },
         { text: 'إزيك يا مريم عاملة إيه؟\nيارب تكونى بخير.', erase: true },
@@ -172,10 +183,10 @@
 
       function typeText(str, cb) {
         let idx = 0;
-        el.textContent = '';
+        renderComposeText('');
         (function step() {
           if (idx <= str.length) {
-            el.textContent = str.slice(0, idx);
+            renderComposeText(str.slice(0, idx));
             const ch = str.charAt(idx - 1);
             idx++;
             setTimeout(step, typingDelay(ch));
@@ -192,9 +203,9 @@
 
       function deleteText(cb) {
         (function step() {
-          const cur = el.textContent;
+          const cur = textNode.data;
           if (cur.length > 0) {
-            el.textContent = cur.slice(0, -1);
+            renderComposeText(cur.slice(0, -1));
             setTimeout(step, 45 + Math.random() * 45);
           } else { cb(); }
         })();
@@ -238,11 +249,15 @@
     tl2.to({}, { duration: 2 });
 
     tl2.call(() => {
-      console.log('🎬 Scene 05 انتهى. El Bakht مستمرة بلا إعادة تشغيل. Scene 06 لم يُبنَ بعد.');
-      // مستقبلاً، بنفس التقنية:
-      // Transition.showDateCard({ day: '16', month: 'February', year: '2026' }, () => {
-      //   Transition.loadScene('scenes/scene06.html', document.getElementById('sceneContainer'));
-      // });
-    });
+      const container = document.getElementById('sceneContainer');
+      Transition.showDateCard({
+        day: '16',
+        month: 'February',
+        year: '2026',
+        location1: 'The Honest Way'
+      }, () => {
+        Transition.loadScene('scenes/scene06.html', container);
+      });
+    }, null, '+=0.5');
   })();
 </script>
