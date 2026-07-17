@@ -1,0 +1,263 @@
+<div class="scene-content" style="justify-content: center;">
+
+  <!-- الشوق بأكمله يحدث هنا، في الرأس فقط. لا صور، لا مشاهد فرعية، فقط كلمات وصمت بينها -->
+  <div class="line" id="l5">Everything changed.</div>
+  <div class="line" id="l6">Except one thing.</div>
+  <div class="line em" id="l7">You.</div>
+
+  <div class="line" id="l8">For months...</div>
+  <div class="line" id="l9">I kept thinking about you.</div>
+  <div class="line" id="l10">September...</div>
+  <div class="line" id="l11">October...</div>
+  <div class="line" id="l12">November...</div>
+  <div class="line" id="l19">December...</div>
+  <div class="line" id="l13">January...</div>
+  <div class="line" id="l14">I wanted to text you.</div>
+  <div class="line" id="l15">Many times.</div>
+  <div class="line" id="l16">But I couldn't.</div>
+
+  <!-- التردد: لا حوار، لا شاشة كاملة، فقط شريط كتابة صغير يفتح ويتردد ويُغلق -->
+  <div class="compose-wrap" id="composeWrap">
+    <div class="compose-bar">
+      <span class="compose-text" id="composeText"><span class="compose-cursor" id="composeCursor">|</span></span>
+    </div>
+  </div>
+
+  <div class="line" id="l17">There was only one way.</div>
+  <div class="line" id="l18">The shortest path...<br>was the honest one.</div>
+
+</div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500&display=swap');
+
+  /* كل شيء هنا محلي لهذا المشهد فقط — نفس لغة الصمت المستخدمة في Scene04 */
+  .line {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 640px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 4vw, 2.3rem);
+    font-weight: 300;
+    color: #F2E9E4;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    opacity: 0;
+    white-space: pre-line;
+  }
+  .line.em {
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    color: #D4B28C;
+    letter-spacing: 0.06em;
+  }
+
+  .compose-wrap {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 320px;
+    opacity: 0;
+  }
+  .compose-bar {
+    display: flex;
+    align-items: center;
+    direction: rtl;
+    background: #1f2c34;
+    border-radius: 22px;
+    padding: 0.7rem 1.1rem;
+    min-height: 1.4rem;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+  .compose-text {
+    font-family: 'Cairo', 'Noto Sans Arabic', 'Inter', sans-serif;
+    font-size: 0.92rem;
+    color: #E9EDEF;
+    direction: rtl;
+    text-align: right;
+    white-space: pre-line;
+  }
+  .compose-text::after {
+    content: '';
+  }
+  .compose-cursor {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    color: #8696a0;
+    display: inline;
+    animation: waBlink 1s step-end infinite;
+  }
+  @keyframes waBlink { 50% { opacity: 0; } }
+</style>
+
+<script>
+  (function() {
+    // أول انتقال موسيقي حقيقي في الفيلم كله يحدث هنا — بلا قطع، بلا وقفة، ذكرى تتحول لأخرى ببطء.
+
+    if (typeof Transition !== 'undefined') {
+      Transition.preload('scenes/scene06.html');
+    }
+
+    const tl = gsap.timeline({ delay: 1, defaults: { ease: 'power2.inOut' } });
+
+    tl.to('#l5', { opacity: 1, duration: 1.4 }, '+=1');
+    tl.to('#l5', { opacity: 0, duration: 1.2 }, '+=2');
+
+    tl.to('#l6', { opacity: 1, duration: 1.4 }, '+=1');
+    tl.to('#l6', { opacity: 0, duration: 1.2 }, '+=2');
+
+    // --- "You." — الكلمة الوحيدة التي لم تتغيّر، تستحق وقفة أطول من كل ما قبلها ---
+    tl.to('#l7', { opacity: 1, duration: 2 }, '+=1.5');
+    tl.to('#l7', { opacity: 0, duration: 1.6 }, '+=3.5');
+
+    // --- سواد طويل قبل بداية الشوق نفسه ---
+    tl.to({}, { duration: 3 });
+
+    tl.to('#l8', { opacity: 1, duration: 1.6 }, '+=0.3');
+    tl.to('#l8', { opacity: 0, duration: 1.2 }, '+=2.4');
+
+    tl.to('#l9', { opacity: 1, duration: 1.6 }, '+=0.8');
+    tl.to('#l9', { opacity: 0, duration: 1.2 }, '+=2.6');
+
+    // --- الشهور تمر أسرع قليلًا من بعضها، كإيقاع هادئ لا يتوقف ---
+    tl.to('#l10', { opacity: 1, duration: 1 }, '+=1.2');
+    tl.to('#l10', { opacity: 0, duration: 0.9 }, '+=1.4');
+
+    tl.to('#l11', { opacity: 1, duration: 1 }, '+=0.6');
+    tl.to('#l11', { opacity: 0, duration: 0.9 }, '+=1.4');
+
+    tl.to('#l12', { opacity: 1, duration: 1 }, '+=0.6');
+    tl.to('#l12', { opacity: 0, duration: 0.9 }, '+=1.4');
+
+    tl.to('#l19', { opacity: 1, duration: 1 }, '+=0.6');
+    tl.to('#l19', { opacity: 0, duration: 0.9 }, '+=1.4');
+
+    tl.to('#l13', { opacity: 1, duration: 1 }, '+=0.6');
+    tl.to('#l13', { opacity: 0, duration: 0.9 }, '+=1.6');
+
+    tl.to('#l14', { opacity: 1, duration: 1.6 }, '+=1');
+    tl.to('#l14', { opacity: 0, duration: 1.2 }, '+=2.4');
+
+    tl.to('#l15', { opacity: 1, duration: 1.2 }, '+=0.8');
+    tl.to('#l15', { opacity: 0, duration: 1 }, '+=1.8');
+
+    tl.to('#l16', { opacity: 1, duration: 1.6 }, '+=1');
+    tl.to('#l16', { opacity: 0, duration: 1.4 }, '+=3');
+
+    // --- سواد قبل التردد ---
+    tl.to({}, { duration: 2.5 });
+
+    // --- التردد: يفتح الشريط، ثم تُدار حلقة الكتابة/الحذف كجافاسكربت عادي، بعيدًا عن GSAP ---
+    tl.to('#composeWrap', { opacity: 1, duration: 1.5 }, '+=0.3');
+
+    tl.call(() => {
+      runHesitation(() => {
+        // تنتهي حلقة التردد، الشريط يُغلق، ثم يُكمل الخط الزمني بقية المشهد
+        gsap.to('#composeWrap', {
+          opacity: 0, duration: 1.5, ease: 'power2.inOut',
+          onComplete: () => tl2.play()
+        });
+      });
+    });
+
+    // --- حلقة الكتابة والحذف: ثلاث محاولات هادئة، بلا دراما، مجرد تردد طبيعي ---
+    function runHesitation(done) {
+      const el = document.getElementById('composeText');
+      const cursor = document.getElementById('composeCursor');
+      const textNode = document.createTextNode('');
+      el.insertBefore(textNode, cursor);
+
+      function renderComposeText(text) {
+        textNode.data = text;
+      }
+
+      const attempts = [
+        { text: 'إزيك يا مريم...', erase: true },
+        { text: 'إزيك يا مريم عاملة إيه؟\nيارب تكونى بخير.', erase: true },
+        { text: 'مريم...\nإزيك؟\nأخبارك إيه؟\nوالشغل عامل معاكى إيه؟', erase: true },
+      ];
+      let i = 0;
+
+      function typeText(str, cb) {
+        let idx = 0;
+        renderComposeText('');
+        (function step() {
+          if (idx <= str.length) {
+            renderComposeText(str.slice(0, idx));
+            const ch = str.charAt(idx - 1);
+            idx++;
+            setTimeout(step, typingDelay(ch));
+          } else { cb(); }
+        })();
+      }
+
+      function typingDelay(ch) {
+        if (ch === '\n') return 650;
+        if (ch === ' ' || ch === '؟') return 180;
+        if (ch === '.') return 260;
+        return 95 + Math.random() * 85;
+      }
+
+      function deleteText(cb) {
+        (function step() {
+          const cur = textNode.data;
+          if (cur.length > 0) {
+            renderComposeText(cur.slice(0, -1));
+            setTimeout(step, 45 + Math.random() * 45);
+          } else { cb(); }
+        })();
+      }
+
+      function nextAttempt() {
+        if (i >= attempts.length) { done(); return; }
+        const attempt = attempts[i];
+        typeText(attempt.text, () => {
+          setTimeout(() => {
+            if (!attempt.erase) { done(); return; }
+            deleteText(() => {
+              i++;
+              setTimeout(nextAttempt, 1100);
+            });
+          }, attempt.erase ? 1800 : 4200);
+        });
+      }
+      nextAttempt();
+    }
+
+    // --- الجزء الثاني من المشهد: يبدأ بعد إغلاق شريط الكتابة تلقائيًا، لا حاجة لتوقيت يدوي ---
+    const tl2 = gsap.timeline({ paused: true, defaults: { ease: 'power2.inOut' } });
+
+    tl2.to('#l17', {
+      opacity: 1,
+      duration: 1.6,
+      onStart: () => {
+        if (typeof AudioManager !== 'undefined') AudioManager.play('el-bakht', 0.06, 3500);
+      }
+    }, '+=1');
+    tl2.to('#l17', { opacity: 0, duration: 1.4 }, '+=3');
+
+    tl2.to({}, { duration: 1 });
+
+    tl2.to('#l18', { opacity: 1, duration: 1.8 }, '+=0.2');
+    tl2.to('#l18', { opacity: 0, duration: 1.8 }, '+=1');
+
+    // --- سواد نهاية المشهد، الأغنية الجديدة ما زالت مستمرة بلا قطع ---
+    tl2.to({}, { duration: 1.5 });
+    tl2.to({}, { duration: 2 });
+
+    tl2.call(() => {
+      const container = document.getElementById('sceneContainer');
+      Transition.showDateCard({
+        day: '16',
+        month: 'February',
+        year: '2026',
+        location1: 'The Honest Way'
+      }, () => {
+        Transition.loadScene('scenes/scene06.html', container);
+      });
+    }, null, '+=0.5');
+  })();
+</script>

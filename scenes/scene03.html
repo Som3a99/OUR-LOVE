@@ -1,0 +1,93 @@
+<div class="scene-content" style="justify-content: flex-start; padding-top: 4vh;">
+  <!-- التاريخ والمكان -->
+  <div class="scene-location" id="loc" style="margin-top:0;">6 October 2024 · NASA Space Apps Cairo — Future University in Egypt</div>
+
+  <!-- البطل الحقيقي للمشهد: أول صورة تجمعنا. تُعطى وقتها كاملاً قبل أي كلمة -->
+  <div class="image-wrapper">
+    <img src="assets/images/nasa-2024.jpeg" alt="أول صورة تجمعنا" class="scene-img" id="img" style="max-height:58vh;" onerror="this.style.display='none';">
+  </div>
+
+  <!-- النصوص تحت الصورة، تكمّلها ولا تغطيها -->
+  <div class="scene-copy" id="copy">
+    <div class="scene-text" id="line1">I looked forward to talking to you.</div>
+    <div class="scene-text" id="line2">Little by little...</div>
+    <div class="scene-text" id="line3">You became part of my everyday thoughts.</div>
+    <div class="scene-text" id="line4">Without realizing it...</div>
+    <div class="scene-text" id="line5">We were already creating memories.</div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // الموسيقى مستمرة من Threshold + Scene01 + Scene02 بلا أي لمسة هنا —
+    // Act I كله ذكرى واحدة، نفس الـ Theme، بلا Restart وبلا Crossfade.
+
+    // تحميل صامت لـ Scene04 مبكرًا — نفس تقنية كل انتقال سابق،
+    // حتى يكون المشهد التالي جاهزًا تمامًا لحظة السواد، بلا أي تأخير أو قطع
+    if (typeof Transition !== 'undefined') {
+      Transition.preload('scenes/scene04.html');
+    }
+
+    const tl = gsap.timeline({ delay: 0.5, defaults: { ease: 'power2.inOut' } });
+
+    // --- التاريخ والمكان ---
+    tl.to('#loc', { opacity: 1, duration: 1.5 }, '+=1');
+    tl.to('#loc', { opacity: 0, delay: 2.5, duration: 1 }, '-=0.2');
+
+    // --- الصورة (Fade + Unblur) — هي البطلة هنا، مش النص ---
+    tl.to('#img', {
+      opacity: 1,
+      scale: 1.0,
+      filter: 'blur(0px)',
+      duration: 8,
+      ease: 'power2.out'
+    }, '-=0.8');
+    tl.call(() => document.getElementById('img').classList.add('loaded'));
+
+    // --- صمت 3-4 ثوانٍ بعد اكتمال الصورة، قبل أي كلمة — خليها تتنفس ---
+    tl.to('#line1', { opacity: 1, duration: 1.5 }, '+=3.5');
+
+    tl.to('#line2', { opacity: 1, duration: 1.3 }, '+=3');
+    tl.to('#line1', { opacity: 0, duration: 0.8 }, '-=0.9');
+
+    tl.to('#line3', { opacity: 1, duration: 1.5 }, '+=2.8');
+    tl.to('#line2', { opacity: 0, duration: 0.8 }, '-=0.8');
+
+    tl.to('#line4', { opacity: 1, duration: 1.3 }, '+=3.5');
+    tl.to('#line3', { opacity: 0, duration: 0.8 }, '-=0.8');
+
+    tl.to('#line5', { opacity: 1, duration: 1.8 }, '+=2.8');
+    tl.to('#line4', { opacity: 0, duration: 0.8 }, '-=0.8');
+
+    // --- الجملة الأخيرة تبقى، تمامًا كالإيقاع المعتاد ---
+    tl.to({}, { duration: 6 });
+
+    // --- اختفاء الجملة الأخيرة ---
+    tl.to('#line5', { opacity: 0, duration: 1.2 }, '+=0.5');
+
+    // --- المشهد ينتهي بالصورة وحدها، كما طُلب — لا نص، فقط الذكرى ---
+    tl.to({}, { duration: 4 });
+
+    // --- Fade out الصورة ---
+    tl.to('#img', { opacity: 0, duration: 1.8, ease: 'power2.in' }, '+=0.5');
+
+    // ملاحظة: لا لمسة للموسيقى هنا — لسه في Act I.
+    // السكون الثقيل الحقيقي هيبقى في بداية Scene04، مش هنا.
+    // الدفء اللي بننهي بيه Scene03 هو اللي هيخلي صمت Scene04 يوجع أكتر.
+
+    // --- سواد قبل الاستعداد لـ Scene04 ---
+    tl.to({}, { duration: 3 });
+
+    tl.call(() => {
+      const container = document.getElementById('sceneContainer');
+      Transition.showDateCard({
+        day: '15',
+        month: 'November',
+        year: '2024',
+        location1: 'Last Message'
+      }, () => {
+        Transition.loadScene('scenes/scene04.html', container);
+      });
+    });
+  })();
+</script>

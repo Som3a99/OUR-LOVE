@@ -1,0 +1,192 @@
+<div class="scene-content" style="justify-content: center;">
+
+  <!-- بطاقة تاريخ محلية لهذا المشهد فقط — نفس اللغة البصرية لبطاقة الانتقال الرئيسية فى index.html،
+       لكنها هنا عنصر داخل المشهد نفسه ولا تُشغّل أى انتقال ولا تلمس sceneContainer -->
+  <div class="local-date-card" id="dateCard">
+    <div class="local-date-stack">9<br>May<br>2026</div>
+    <div class="local-location-text">First Date</div>
+  </div>
+
+  <!-- الجزء الأول: كلام قبل ظهور الصورة، بنفس لغة الصمت المستخدمة فى Scene04/Scene05/Scene07 -->
+  <div class="silence-line" id="n1a">We had already shared...<br>countless words.</div>
+  <div class="silence-line" id="n1b">But somehow...<br>meeting you<br>still felt like the beginning.</div>
+
+  <!-- الصورة الوحيدة — بطلة المشهد، لا سلايدشو ولا صور متعددة -->
+  <div class="image-wrapper" id="imgWrap">
+    <img src="assets/images/first-date.jpeg" alt="أول لقاء" class="scene-img" id="img" style="max-height:70vh;" onerror="this.style.display='none';">
+  </div>
+
+  <!-- الجزء الثانى والثالث: الكلام تحت الصورة تمامًا كما فى Scene01/Scene02/Scene03 — الصورة لا تُغطى أبدًا -->
+  <div class="scene-copy" id="copy">
+    <div class="scene-text" id="n2a">Looking back...</div>
+    <div class="scene-text" id="n2b">I don't remember<br>what we talked about.</div>
+    <div class="scene-text" id="n2c">I only remember...<br>how peaceful<br>everything felt.</div>
+    <div class="scene-text" id="n3a">I didn't know it then...</div>
+    <div class="scene-text" id="n3b">but that day...</div>
+    <div class="scene-text" id="n3c">I was already<br>falling in love.</div>
+  </div>
+
+</div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500&display=swap');
+
+  /* كل شيء هنا محلي لهذا المشهد فقط */
+
+  .local-date-card {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 0;
+  }
+  .local-date-stack {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300;
+    color: #D4B28C;
+    direction: ltr; line-height: 1.4;
+    margin-bottom: 1rem;
+  }
+  .local-location-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem; font-weight: 300;
+    color: #b8a082;
+    letter-spacing: 0.05em; direction: ltr;
+  }
+
+  /* نفس مكوّن .silence-line المستخدم حرفيًا فى Scene04/Scene05/Scene07 — بلا أى تعديل على تصميمه */
+  .silence-line {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 640px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 4vw, 2.3rem);
+    font-weight: 300;
+    color: #F2E9E4;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    opacity: 0;
+    white-space: pre-line;
+  }
+</style>
+
+<script>
+  (function() {
+    // ============================================================
+    // Scene08 — First Date
+    // الفصل الجديد يبدأ صوتيًا هنا: "Bloom" — بلا Restart لأى شىء قبلها،
+    // فقط بداية جديدة هادئة جدًا (~0.02) تتصاعد ببطء إلى (~0.06) على مدى 10-12 ثانية.
+    // نفس الأغنية تكمل بلا أى لمسة حتى نهاية Scene09.
+    // ============================================================
+
+    if (typeof Transition !== 'undefined') {
+      Transition.preload('scenes/scene09.html');
+    }
+    (new Image()).src = 'assets/images/first-date.jpeg';
+
+    const dateCard = document.getElementById('dateCard');
+
+    function setDateCard(day, month, year, subtitle) {
+      dateCard.innerHTML = `
+        <div class="local-date-stack">${day}<br>${month}<br>${year}</div>
+        <div class="local-location-text">${subtitle}</div>
+      `;
+    }
+
+    function startBloomIntro() {
+      if (typeof AudioManager === 'undefined') return;
+      AudioManager.play('Bloom', 0.01, 1);
+      setTimeout(() => {
+        if (typeof AudioManager !== 'undefined') {
+          AudioManager.fadeTo(0.06, 14000);
+        }
+      }, 50);
+    }
+
+    const tl = gsap.timeline({ delay: 0.5, defaults: { ease: 'power2.inOut' } });
+
+    // --- الموسيقى تبدأ فى نفس لحظة دخول المشهد، مستقلة تمامًا عن حركة النصوص ---
+    tl.call(() => {
+      startBloomIntro();
+    });
+
+    // --- بطاقة التاريخ المحلية: 9 May 2026 · First Date ---
+    tl.to('#dateCard', { opacity: 1, duration: 1.8 }, '+=0.5');
+    tl.to('#dateCard', { opacity: 0, delay: 3, duration: 1.6 }, '-=0.2');
+
+    // --- سواد قصير قبل الكلام الأول ---
+    tl.to({}, { duration: 1 });
+
+    // --- الجزء الأول: كلام بلا صورة، بلا استعجال ---
+    tl.to('#n1a', { opacity: 1, duration: 1.6 }, '+=0.5');
+    tl.to('#n1a', { opacity: 0, duration: 1.2 }, '+=2.6');
+
+    tl.to('#n1b', { opacity: 1, duration: 1.8 }, '+=1');
+    tl.to('#n1b', { opacity: 0, duration: 1.4 }, '+=3.2');
+
+    // --- سواد قبل ظهور الصورة ---
+    tl.to({}, { duration: 2 });
+
+    // --- الصورة تظهر (Fade + Unblur)، وتبقى البطلة حتى قرب نهاية المشهد ---
+    tl.to('#img', {
+      opacity: 1,
+      filter: 'blur(0px)',
+      duration: 6,
+      ease: 'power2.out'
+    }, '-=0.5');
+    tl.call(() => document.getElementById('img').classList.add('loaded'));
+
+    // --- حركة تكبير خفيفة جدًا وممتدة على طول بقاء الصورة كلها (1.00 → 1.03) —
+    //     بلا دراما، بلا تدوير، بلا Parallax، فقط نبض حياة هادئ جدًا ---
+    tl.to('#img', { scale: 1.055, duration: 38, ease: 'none' }, '<');
+
+    // --- الجزء الثانى: الكلام يظهر تحت الصورة، والصورة لا تُلمس أبدًا ---
+    tl.to('#n2a', { opacity: 1, duration: 1.4 }, '-=2');
+    tl.to('#n2a', { opacity: 0, duration: 1 }, '+=2.2');
+
+    tl.to('#n2b', { opacity: 1, duration: 1.6 }, '+=0.8');
+    tl.to('#n2b', { opacity: 0, duration: 1.2 }, '+=3');
+
+    tl.to('#n2c', { opacity: 1, duration: 1.8 }, '+=1');
+    tl.to('#n2c', { opacity: 0, duration: 1.4 }, '+=3.5');
+
+    // --- سواد قصير بين الجزء الثانى والثالث، الصورة ما زالت موجودة كما هى ---
+    tl.to({}, { duration: 2 });
+
+    // --- الجزء الثالث: الكلمات الأخيرة ---
+    tl.to('#n3a', { opacity: 1, duration: 1.4 }, '+=0.5');
+    tl.to('#n3a', { opacity: 0, duration: 1 }, '+=2');
+
+    tl.to('#n3b', { opacity: 1, duration: 1.4 }, '+=0.8');
+    tl.to('#n3b', { opacity: 0, duration: 1 }, '+=2');
+
+    tl.to('#n3c', { opacity: 1, duration: 1.8 }, '+=1');
+    tl.to('#n3c', { opacity: 0, duration: 1.4 }, '+=3.5');
+
+    // --- الصورة تبقى وحدها، بلا نص، حتى يتسع الوقت للشعور نفسه ---
+    tl.to({}, { duration: 5.5 });
+
+    // --- سواد بطىء وحيد — الموسيقى مستمرة بلا أى لمسة، بلا Restart، بلا Fade ---
+    tl.to('#img', { opacity: 0, duration: 2.8, ease: 'power2.in' }, '+=0.3');
+
+    // --- سكون قصير على السواد قبل أن تظهر البطاقة المحلية الجديدة ---
+    tl.to({}, { duration: 2.5 });
+
+    tl.call(() => {
+      setDateCard('12', 'May', '2026', 'Three Days Later');
+      gsap.set('#dateCard', { opacity: 0 });
+    });
+
+    tl.to('#dateCard', { opacity: 1, duration: 1.8 }, '+=0.2');
+    tl.to('#dateCard', { opacity: 0, duration: 1.6 }, '+=3');
+
+    // --- انتقال إلى Scene09 بعد انطفاء البطاقة المحلية ---
+    tl.call(() => {
+      const container = document.getElementById('sceneContainer');
+      Transition.loadScene('scenes/scene09.html', container);
+    });
+  })();
+</script>
