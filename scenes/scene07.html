@@ -1,0 +1,520 @@
+<div class="scene-content" style="justify-content: center;">
+
+  <!-- نفس مكوّن الواتساب المستخدم فى Scene04/Scene06 بالحرف — نفس المحادثة تمامًا، تُستكمل فقط -->
+  <div class="wa-wrap" id="waWrap">
+    <div class="wa-header">
+      <span class="wa-back">‹</span>
+      <span class="wa-avatar">♡</span>
+      <div class="wa-headtext">
+        <div class="wa-name">♡</div>
+        <div class="wa-status" id="waStatus">online</div>
+      </div>
+    </div>
+
+    <div class="wa-messages" id="waMessages">
+      <!-- المحادثة تمامًا كما انتهى بها Scene06 — لا يُحرَّك منها شىء ولا يظهر بأى حركة، فقط موجود -->
+      <div class="wa-date-divider">16 February 2026</div>
+      <div class="wa-bubble sent">
+        <span dir="rtl" lang="ar">ممكن نفكر فى خطوة رسمية قدام{{nl}}ايه رأيك؟</span>
+        <small>9:48 PM <i class="wa-tick">✓✓</i></small>
+      </div>
+      <div class="wa-bubble received">
+        <span dir="rtl" lang="ar">انا مش جاهزة نفسيًا دلوقتى...{{nl}}بس مش معنى كده انى رفضاك</span>
+        <small>9:54 PM</small>
+      </div>
+
+      <!-- Part 6: هذا الفاصل يبقى مخفيًا — لا يظهر إلا بعد أن يستقر الشات من جديد، هو ما يخبر الجمهور أن شهرًا مرّ -->
+      <div class="wa-date-divider" id="newDivider" style="opacity:0;">19 March 2026 · Eid Night</div>
+    </div>
+
+    <!-- شريط الكتابة — نفس آلية الكتابة المستخدمة فى Scene06 حرفيًا -->
+    <div class="wa-compose-row">
+      <div class="compose-bar" id="composeBar">
+        <span class="compose-text" id="composeText"><span class="compose-cursor" id="composeCursor">|</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- الجمل الصامتة بين الذكرى واختفائها وعودة الشات — نفس مكوّن .silence-line المستخدم حرفيًا فى Scene04/Scene05 -->
+
+  <!-- Part 3 — أفكاره -->
+  <div class="silence-line" id="t1">I couldn't change her answer.</div>
+  <div class="silence-line" id="t2">But I could change what I did next.</div>
+  <div class="silence-line" id="t3">So I prayed...<br>and waited.</div>
+
+  <!-- Part 4 — الوقت يمر: لا تقويم، لا مونتاج، فقط كلمة تلو الأخرى -->
+  <div class="silence-line" id="tpFeb">February</div>
+  <div class="silence-line" id="tpD1">17</div>
+  <div class="silence-line" id="tpD2">18</div>
+  <div class="silence-line" id="tpD3">19</div>
+  <div class="silence-line" id="tpD4">20</div>
+  <div class="silence-line" id="tpD5">···</div>
+  <div class="silence-line" id="tpD6">25</div>
+  <div class="silence-line" id="tpD7">···</div>
+  <div class="silence-line" id="tpMarch">March</div>
+  <div class="silence-line" id="tpD8">1</div>
+  <div class="silence-line" id="tpD9">5</div>
+  <div class="silence-line" id="tpD10">10</div>
+  <div class="silence-line" id="tpD11">15</div>
+  <div class="silence-line" id="tpMarch01">19 March</div>
+
+  <!-- Part 5 — الأمل -->
+  <div class="silence-line" id="h1">Hope doesn't always ask for certainty.</div>
+  <div class="silence-line" id="h2">Some people are worth waiting for.</div>
+
+  <!-- الإغلاق — بعد أن تهدأ الحياة اليومية على الشاشة -->
+  <div class="silence-line" id="end1">Sometimes, the smallest message changes everything.</div>
+  <div class="silence-line" id="end2">And somehow...<br>it became a habit.</div>
+  <div class="silence-line" id="end3">Day by day...<br>we became part of each other's lives.</div>
+
+</div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500&display=swap');
+
+  /* كل شيء هنا محلي لهذا المشهد فقط — نفس أسماء الكلاسات المستخدمة فى Scene04/Scene06 حرفيًا */
+  .wa-wrap {
+    width: 100%;
+    max-width: 360px;
+    background: #0b141a;
+    border: 1px solid rgba(212,178,140,0.15);
+    border-radius: 14px;
+    overflow: hidden;
+    opacity: 0;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+  }
+  .wa-header {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.8rem 1rem;
+    background: #1f2c34;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .wa-back {
+    font-size: 1.4rem;
+    color: #d4b28c;
+    line-height: 1;
+  }
+  .wa-avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3a2a22, #6b4a35);
+    display: flex; align-items: center; justify-content: center;
+    color: #f2b6c6; font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .wa-headtext { display: flex; flex-direction: column; }
+  .wa-name { font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #F2E9E4; }
+  .wa-status { font-family: 'Inter', sans-serif; font-size: 0.7rem; color: #8696a0; margin-top: 0.1rem; }
+
+  /* ارتفاع ثابت هذه المرة — عشان يظهر "السكرول" الهادئ أثناء تراكم رسائل الحياة اليومية فى Part 9 */
+  .wa-messages {
+    padding: 1rem 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 320px;
+    overflow-y: hidden;
+    justify-content: flex-end;
+  }
+  .wa-date-divider {
+    align-self: center;
+    background: rgba(255,255,255,0.07);
+    color: #8696a0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.03em;
+    padding: 0.2rem 0.65rem;
+    border-radius: 8px;
+    margin: 0.25rem 0;
+    flex-shrink: 0;
+  }
+  .wa-bubble {
+    max-width: 78%;
+    padding: 0.5rem 0.7rem 0.35rem;
+    border-radius: 9px;
+    font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.35;
+    color: #E9EDEF;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    opacity: 1;
+    transform: none;
+  }
+  .wa-bubble span {
+    direction: rtl;
+    unicode-bidi: plaintext;
+    text-align: right;
+    white-space: pre-line;
+  }
+  .wa-bubble small {
+    align-self: flex-end;
+    font-size: 0.65rem;
+    color: rgba(233,237,239,0.55);
+    margin-top: 0.2rem;
+  }
+  .wa-tick { font-style: normal; color: rgba(233,237,239,0.7); }
+  .wa-bubble.received {
+    background: #1f2c34;
+    align-self: flex-start;
+    border-top-left-radius: 2px;
+  }
+  .wa-bubble.sent {
+    background: #005c4b;
+    align-self: flex-end;
+    border-top-right-radius: 2px;
+  }
+
+  .wa-compose-row {
+    padding: 0.6rem 0.8rem 0.85rem;
+    background: #0b141a;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .compose-bar {
+    display: flex;
+    align-items: center;
+    direction: rtl;
+    background: #1f2c34;
+    border-radius: 22px;
+    padding: 0.6rem 1rem;
+    min-height: 1.3rem;
+    transition: box-shadow 0.4s ease, background 0.4s ease;
+  }
+  .compose-bar.focused {
+    background: #24333d;
+    box-shadow: 0 0 0 1px rgba(212,178,140,0.25);
+  }
+  .compose-text {
+    font-family: 'Cairo', 'Noto Sans Arabic', 'Inter', sans-serif;
+    font-size: 0.92rem;
+    color: #E9EDEF;
+    direction: rtl;
+    text-align: right;
+    white-space: pre-line;
+  }
+  .compose-cursor {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    color: #8696a0;
+    display: inline;
+    animation: waBlink 1s step-end infinite;
+  }
+  @keyframes waBlink { 50% { opacity: 0; } }
+
+  /* الجمل الصامتة — نفس مكوّن .silence-line المستخدم حرفيًا فى Scene04/Scene05، بلا أى تعديل على تصميمه */
+  .silence-line {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 640px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 4vw, 2.3rem);
+    font-weight: 300;
+    color: #F2E9E4;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    opacity: 0;
+    white-space: pre-line;
+  }
+</style>
+
+<script>
+  (function() {
+    // الموسيقى مستمرة — "El Bakht" يكمل تمامًا من حيث تركه Scene06، لا play، لا stop، لا fade، لا لمسة إطلاقًا.
+
+    // تحميل صامت لـ Scene08 مبكرًا — نفس تقنية كل انتقال سابق فى الفيلم
+    if (typeof Transition !== 'undefined') {
+      Transition.preload('scenes/scene08.html');
+    }
+
+    // تحويل {{nl}} إلى سطر جديد حقيقى فى النصوص الثابتة أعلاه
+    document.querySelectorAll('#waMessages .wa-bubble span').forEach(el => {
+      el.textContent = el.textContent.replace(/{{nl}}/g, '\n');
+    });
+
+    const tl = gsap.timeline({ delay: 1, defaults: { ease: 'power2.inOut' } });
+
+    // === PART 1 — الذكرى الأخيرة: نفس المحادثة كما انتهت بالضبط، بلا أى حركة على الرسائل، فقط سكون ===
+    tl.to('#waWrap', { opacity: 1, duration: 2 }, '+=1');
+    tl.to({}, { duration: 3 }); // اتركها تستقر — الجمهور يتذكر
+
+    // === PART 2 — الذكرى نفسها تختفى، ببطء، إلى السواد ===
+    tl.to('#waWrap', { opacity: 0, duration: 2.6 }, '+=0.2');
+
+    // === PART 3 — أفكاره، جملة واحدة فى كل مرة، بنفس إيقاع Scene04/Scene05 بالضبط ===
+    tl.to('#t1', { opacity: 1, duration: 1.6 }, '+=1.5');
+    tl.to('#t1', { opacity: 0, duration: 1.2 }, '+=2.4');
+
+    tl.to('#t2', { opacity: 1, duration: 1.6 }, '+=1');
+    tl.to('#t2', { opacity: 0, duration: 1.2 }, '+=2.4');
+
+    tl.to('#t3', { opacity: 1, duration: 1.8 }, '+=1.2');
+    tl.to('#t3', { opacity: 0, duration: 1.4 }, '+=3');
+
+    // === PART 4 — الوقت يمر: لا تقويم، لا مونتاج. فبراير، ثم الأيام تتسرب بهدوء، ثم مارس ===
+    tl.to({}, { duration: 2 });
+
+    tl.to('#tpFeb', { opacity: 1, duration: 1.4 }, '+=1');
+    tl.to('#tpFeb', { opacity: 0, duration: 1 }, '+=1.6');
+
+    // الأيام تمر أسرع من أى جملة أخرى فى المشهد — كأن الوقت يتسرب دون أن يُلاحظ
+    tl.to('#tpD1', { opacity: 1, duration: 0.4 }, '+=0.5');
+    tl.to('#tpD1', { opacity: 0, duration: 0.35 }, '+=0.2');
+    tl.to('#tpD2', { opacity: 1, duration: 0.4 }, '+=0.15');
+    tl.to('#tpD2', { opacity: 0, duration: 0.35 }, '+=0.2');
+    tl.to('#tpD3', { opacity: 1, duration: 0.4 }, '+=0.15');
+    tl.to('#tpD3', { opacity: 0, duration: 0.35 }, '+=0.2');
+    tl.to('#tpD4', { opacity: 1, duration: 0.4 }, '+=0.15');
+    tl.to('#tpD4', { opacity: 0, duration: 0.35 }, '+=0.2');
+    tl.to('#tpD5', { opacity: 1, duration: 0.45 }, '+=0.2');
+    tl.to('#tpD5', { opacity: 0, duration: 0.4 }, '+=0.3');
+    tl.to('#tpD6', { opacity: 1, duration: 0.4 }, '+=0.2');
+    tl.to('#tpD6', { opacity: 0, duration: 0.35 }, '+=0.2');
+    tl.to('#tpD7', { opacity: 1, duration: 0.45 }, '+=0.2');
+    tl.to('#tpD7', { opacity: 0, duration: 0.4 }, '+=0.3');
+    tl.to('#tpMarch', { opacity: 1, duration: 1.6 }, '+=0.8');
+    tl.to('#tpMarch', { opacity: 0, duration: 1.2 }, '+=2');
+    tl.to('#tpD8', { opacity: 1, duration: 0.4 }, '+=0.2');
+    tl.to('#tpD8', { opacity: 0, duration: 0.35 }, '+=0.2');
+    tl.to('#tpD9', { opacity: 1, duration: 0.4 }, '+=0.15');
+    tl.to('#tpD9', { opacity: 0, duration: 0.35 }, '+=0.2');
+    tl.to('#tpD10', { opacity: 1, duration: 0.4 }, '+=0.15');
+    tl.to('#tpD10', { opacity: 0, duration: 0.35 }, '+=0.2');
+    tl.to('#tpD11', { opacity: 1, duration: 0.4 }, '+=0.15');
+    tl.to('#tpD11', { opacity: 0, duration: 0.35 }, '+=0.2');
+
+
+    tl.to('#tpMarch01', { opacity: 1, duration: 1.6 }, '+=0.8');
+    tl.to('#tpMarch01', { opacity: 0, duration: 1.2 }, '+=2');
+
+    // === PART 5 — الأمل: فكرتان أخيرتان فقط ===
+    tl.to({}, { duration: 1.5 });
+
+    tl.to('#h1', { opacity: 1, duration: 1.6 }, '+=1');
+    tl.to('#h1', { opacity: 0, duration: 1.2 }, '+=2.6');
+
+    tl.to('#h2', { opacity: 1, duration: 1.8 }, '+=1');
+    tl.to('#h2', { opacity: 0, duration: 1.4 }, '+=3');
+
+    // === PART 6 — العودة إلى نفس الشات: فبراير فقط أولاً، الفاصل الجديد لسه مخفى ===
+    tl.to({}, { duration: 2 });
+    tl.to('#waWrap', { opacity: 1, duration: 2 }, '+=0.5');
+
+    // --- سكون: اتركه يستقر كشات قديم أُعيد فتحه، قبل أى إشارة لمرور الوقت ---
+    tl.to({}, { duration: 2 });
+
+    // --- الآن فقط، وبهدوء، يظهر فاصل التاريخ الجديد — هنا فقط يفهم الجمهور أن شهرًا مرّ ---
+    tl.to('#newDivider', { opacity: 1, duration: 0.8 }, '+=0.3');
+    tl.to({}, { duration: 0.8 });
+
+    // --- لمسة الإصبع على شريط الكتابة، تمامًا كما فى Scene06 ---
+    tl.call(() => {
+      document.getElementById('composeBar').classList.add('focused');
+    });
+    tl.to({}, { duration: 0.6 });
+
+    // === PART 7 — الكتابة الحقيقية تبدأ هنا، بنفس محرك الكتابة المستخدم فى Scene06 حرفيًا ===
+    tl.call(() => {
+      typeMessage(EID_MESSAGE, () => {
+        // بعد الكتابة، انتظار طبيعى قصير قبل الإرسال
+        setTimeout(() => {
+          sendMessage(EID_MESSAGE.lines.map(l => l.text).join('\n'), '9:58 PM', () => {
+            setTimeout(startHerReply, 800);
+          });
+        }, 2000);
+      });
+    });
+
+    // --- الرسالة الحقيقية، سطر واحد بثلاثة أسطر داخلية ---
+    const EID_MESSAGE = {
+      lines: [
+        { text: 'كل سنة وانتى طيبة يا مريم', pause: 750 },
+        { text: 'يارب يكون عيد سعيد عليكى', pause: 750 },
+        { text: 'ويعدى عليكى وانتى مبسوطة دايمًا ❤️', pause: 0 }
+      ]
+    };
+
+    function typingDelay(ch) {
+      if (ch === ' ') return 150;
+      if (ch === '؟') return 200;
+      return 85 + Math.random() * 75;
+    }
+
+    // --- نفس دالة الكتابة سطرًا سطرًا المستخدمة فى Scene06 حرفيًا ---
+    function typeLine(existing, str, cb) {
+      let idx = 0;
+      (function step() {
+        if (idx <= str.length) {
+          renderComposeText(existing + str.slice(0, idx));
+          const ch = str.charAt(idx - 1);
+          idx++;
+          setTimeout(step, typingDelay(ch));
+        } else {
+          cb(existing + str);
+        }
+      })();
+    }
+
+    function typeMessage(msg, cb) {
+      let full = '';
+      let i = 0;
+      function nextLine() {
+        if (i >= msg.lines.length) { cb(); return; }
+        const line = msg.lines[i];
+        typeLine(full ? full + '\n' : '', line.text, (result) => {
+          full = result;
+          i++;
+          setTimeout(nextLine, line.pause);
+        });
+      }
+      nextLine();
+    }
+
+    // --- فقاعة جديدة، مُرسلة أو مستقبلة — نفس مكوّن الفقاعة المستخدم فى Scene06، مُعمَّم فقط لاتجاهين بدل واحد ---
+    function createBubble(text, type, timestamp) {
+      const wrap = document.createElement('div');
+      wrap.className = `wa-bubble ${type}`;
+      wrap.style.opacity = 0;
+      wrap.style.transform = 'translateY(2px)';
+
+      const span = document.createElement('span');
+      span.setAttribute('dir', 'rtl');
+      span.setAttribute('lang', 'ar');
+      span.textContent = text;
+      wrap.appendChild(span);
+
+      if (timestamp) {
+        const small = document.createElement('small');
+        small.appendChild(document.createTextNode(timestamp + (type === 'sent' ? ' ' : '')));
+        if (type === 'sent') {
+          const tick = document.createElement('i');
+          tick.className = 'wa-tick';
+          small.appendChild(tick);
+          wrap.appendChild(small);
+          document.getElementById('waMessages').appendChild(wrap);
+          return { wrap, tick };
+        }
+        wrap.appendChild(small);
+      }
+
+      document.getElementById('waMessages').appendChild(wrap);
+      return { wrap, tick: null };
+    }
+
+    // --- تُظهر الفقاعة ثم تُمرّر الشات لأسفل ببطء شديد، أبدًا بشكل آلى — هذا ما يحقق مطلب "السكرول الهادئ" ---
+    function revealAndScroll(wrap, duration) {
+      gsap.to(wrap, { opacity: 1, y: 0, duration: duration || 0.3, ease: 'sine.out' });
+      const list = document.getElementById('waMessages');
+      gsap.to(list, { scrollTop: list.scrollHeight, duration: 1.1, ease: 'power1.inOut' });
+    }
+
+    // --- إرسال رسالة العيد، بنفس حركة الإرسال والعلامتين المستخدمة فى Scene06 لرسالته الأخيرة (الأهم عاطفيًا) ---
+    function sendMessage(text, timestamp, cb) {
+      renderComposeText('');
+      const { wrap, tick } = createBubble(text, 'sent', timestamp);
+      revealAndScroll(wrap, 0.28);
+
+      setTimeout(() => { tick.textContent = '✓'; }, 700);
+      setTimeout(() => {
+        tick.textContent = '✓✓';
+        cb();
+      }, 2100);
+    }
+
+    // === PART 8 — ردها: "يكتب..." لثانيتين، ثم رسالتها تظهر بهدوء تام، بلا أى مبالغة ===
+    function startHerReply() {
+      const statusEl = document.getElementById('waStatus');
+      statusEl.textContent = 'typing...';
+
+      setTimeout(() => {
+        statusEl.textContent = 'online';
+        const { wrap } = createBubble('وانت طيب يا محمد\nعيد سعيد عليك يارب ❤️❤️❤️', 'received', '9:59 PM');
+        revealAndScroll(wrap, 0.35);
+
+        // --- وقفة عاطفية مهمة: لا شىء يتحرك، الجمهور فقط يشعر بعودة الأمل ---
+        setTimeout(runDailyLifeMontage, 3000);
+      }, 2000);
+    }
+
+    // === PART 9 — الحياة اليومية: رسائل حقيقية صغيرة فقط، لا حشو عشوائى، تنتهى دومًا على نفس الوداع الهادئ ===
+    const DAILY_MESSAGES = [
+      { text: 'صباح الخير ☀️', type: 'sent' },
+      { text: 'صباح النور', type: 'received' },
+      { text: 'وصلتى؟', type: 'sent' },
+      { text: 'الحمد لله وصلت', type: 'received' },
+      { text: 'أما تروحى طمنينى ❤️', type: 'sent' },
+      { text: 'اوك', type: 'received' },
+      { text: 'روحتى؟', type: 'sent' },
+      { text: 'انا فى البيت', type: 'received' },
+      { text: 'الشغل عامل ايه؟', type: 'sent' },
+      { text: 'كويس الحمد لله', type: 'received' },
+      { text: 'انتى عاملة ايه؟', type: 'sent' },
+      { text: 'إيه اللى مضايقك؟', type: 'sent' },
+      { text: 'أنا جنبك لو عاوزة تحكى.', type: 'sent' },
+      { text: 'ربنا يوفقك ❤️', type: 'received' },
+      { text: 'أنا واثق فيكى.', type: 'sent' },
+      { text: 'انتى قدها.', type: 'sent' },
+      { text: 'متقلقيش.', type: 'sent' },
+      { text: 'تصبحى على خير 🌙', type: 'sent' },
+      { text: 'وأنت من أهله ❤️', type: 'received' }
+    ];
+
+    function runDailyLifeMontage() {
+      let i = 0;
+      function next() {
+        if (i >= DAILY_MESSAGES.length) {
+          // --- اتركه مفتوحًا لحظة إضافية، كأن الحديث ما زال مستمرًا خارج الكادر، قبل أن يبدأ الإغلاق ---
+          setTimeout(() => tlEnd.play(), 2800);
+          return;
+        }
+        const m = DAILY_MESSAGES[i];
+        const { wrap } = createBubble(m.text, m.type, null);
+        revealAndScroll(wrap, 0.3);
+        i++;
+        setTimeout(next, 550 + Math.random() * 400);
+      }
+      next();
+    }
+
+    // === الإغلاق — نفس فلسفة GSAP التصريحية: خط زمني ثانٍ مُجهَّز مسبقًا (كـ tl2 فى Scene05)، يُشغَّل لاحقًا فقط ===
+    const tlEnd = gsap.timeline({ paused: true, defaults: { ease: 'power2.inOut' } });
+
+    tlEnd.to('#waWrap', { opacity: 0, duration: 2.4, ease: 'power2.in' }, '+=0.3');
+
+    tlEnd.to('#end1', { opacity: 1, duration: 1.6 }, '+=1.5');
+    tlEnd.to('#end1', { opacity: 0, duration: 1.2 }, '+=2.6');
+
+    tlEnd.to('#end2', { opacity: 1, duration: 1.6 }, '+=1');
+    tlEnd.to('#end2', { opacity: 0, duration: 1.2 }, '+=2.8');
+
+    tlEnd.to('#end3', { opacity: 1, duration: 1.8 }, '+=1');
+    tlEnd.to('#end3', { opacity: 0, duration: 1.4 }, '+=3');
+
+    tlEnd.to({}, { duration: 1.5 });
+
+    // --- بطاقة الذكرى القياسية نفسها، ثم Scene08 — لا انتقال جديد، لا أسلوب مختلف ---
+    tlEnd.call(() => {
+      const container = document.getElementById('sceneContainer');
+      Transition.showDateCard({
+        year: '2026',
+        location1: 'The Everyday'
+      }, () => {
+        Transition.loadScene('scenes/scene08.html', container);
+      });
+    });
+
+    const composeTextNode = document.createTextNode('');
+    const composeCursor = document.getElementById('composeCursor');
+    const composeText = document.getElementById('composeText');
+    composeText.insertBefore(composeTextNode, composeCursor);
+
+    function renderComposeText(text) {
+      composeTextNode.data = text;
+    }
+  })();
+</script>

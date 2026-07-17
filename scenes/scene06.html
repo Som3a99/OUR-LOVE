@@ -169,6 +169,9 @@
 <script>
   (function() {
     // الموسيقى مستمرة من Scene05 بلا أي لمسة — لا play، لا stop، لا fade جديد هنا إطلاقًا.
+    if (typeof Transition !== 'undefined') {
+      Transition.preload('scenes/scene07.html');
+    }
 
     const tl = gsap.timeline({ delay: 1, defaults: { ease: 'power2.inOut' } });
 
@@ -351,10 +354,14 @@
           onComplete: () => {
             // --- سواد، ثم بطاقة الذكرى الموجودة فعلاً — نفس مكوّن كل انتقال سابق، ونتوقف هنا فقط ---
             setTimeout(() => {
+              const container = document.getElementById('sceneContainer');
               Transition.showDateCard({
                 day: '19',
                 month: 'March',
-                year: '2026'
+                year: '2026',
+                location1: 'The Second Try'
+                }, () => {
+                Transition.loadScene('scenes/scene07.html', container);
               });
             }, 900);
           }
