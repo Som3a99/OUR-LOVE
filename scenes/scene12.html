@@ -11,7 +11,7 @@
   <!-- ============ الافتتاح — يوم عادى، لا شىء يوحى بما هو قادم ============ -->
   <div class="silence-line" id="o1">That day...<br>felt like any other day.</div>
   <div class="silence-line" id="o2">I had just finished work.</div>
-  <div class="silence-line" id="o3">You were waiting for me...<br>in <span dir="rtl" lang="ar">الماظة</span>.</div>
+  <div class="silence-line" id="o3">You were waiting for me...<br>in Almaza.</div>
   <div class="silence-line" id="o4">I only wanted...<br>to see you for a few minutes.</div>
 
   <!-- ============ الوسط — لا احتفال، لا مناسبة، فقط دقائق مسروقة ============ -->
@@ -31,7 +31,7 @@
   <div class="silence-line" id="c2">You looked at me.</div>
   <div class="silence-line" id="c3">You smiled.</div>
   <div class="silence-line" id="c4">Then you said...</div>
-  <div class="silence-line confession-line" id="c5">"I love you."</div>
+  <div class="silence-line confession-line" id="c5" dir="rtl" lang="ar">أنا بحبك أوي</div>
 
   <!-- ============ ما بعد — الهدوء الذى يعقب اللحظة ============ -->
   <div class="silence-line" id="a1">Everything changed.</div>
@@ -60,7 +60,7 @@
 </div>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@500;700;800&display=swap');
 
   #s12Content {
     position: fixed;
@@ -120,8 +120,13 @@
   /* "I love you." — يستحق أكثر من أى سطر آخر فى الفيلم كله. لا صراخ، فقط دفء أكبر قليلاً */
   .confession-line {
     font-size: clamp(1.9rem, 5vw, 3rem);
-    font-style: italic;
+    font-family: 'Cairo', 'Aref Ruqaa', 'IBM Plex Sans Arabic', 'Alexandria', 'Inter', sans-serif;
+    font-weight: 700;
+    font-style: normal;
     color: #F2E9E4;
+    direction: rtl;
+    unicode-bidi: plaintext;
+    letter-spacing: 0;
     text-shadow: 0 0 26px rgba(212,178,140,0.35);
   }
 

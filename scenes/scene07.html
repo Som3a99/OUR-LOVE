@@ -501,8 +501,10 @@
     tlEnd.call(() => {
       const container = document.getElementById('sceneContainer');
       Transition.showDateCard({
+        day: '9',
+        month: 'May',
         year: '2026',
-        location1: 'The Everyday'
+        location1: 'Our First Date'
       }, () => {
         Transition.loadScene('scenes/scene08.html', container);
       });
