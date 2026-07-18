@@ -1,0 +1,270 @@
+<div class="scene-content" id="s11Content" style="justify-content: center; padding: 0;">
+
+  <!-- صورة واحدة فقط، تملأ الشاشة، ولا تتغير طوال المشهد كله — لا معرض، لا قطع، لا ذوبان بين صور.
+       دفعة تكبير شبه غير محسوسة (1.00 → 1.035) تمتد على طول المشهد كله، كأنها تنفّس لا حركة كاميرا -->
+  <div class="fullbleed-wrap" id="fullbleedWrap">
+    <img src="assets/images/second-date.jpg" alt="" class="fullbleed-img" id="fbImg" onerror="this.style.display='none';">
+  </div>
+
+  <!-- ستارة سفلية خفيفة جدًا هذه المرة — فقط بالقدر الكافي لتبقى الكلمات مقروءة، الصورة هى البطلة دومًا -->
+  <div class="scrim"></div>
+
+  <!-- بطاقة التاريخ المحلية، بنفس لغة بطاقة Scene08 حرفيًا -->
+  <div class="local-date-card" id="dateCard11">
+    <div class="local-date-stack">10<br>June<br>2026</div>
+    <div class="local-location-text">Second Date</div>
+  </div>
+
+  <!-- الجزء الأول -->
+  <div class="narr-line" id="n1">Three weeks earlier...</div>
+  <div class="narr-line" id="n2">I wondered...<br>if you felt the same.</div>
+  <div class="narr-line" id="n3">Now...<br>I knew.</div>
+
+  <!-- الجزء الثانى -->
+  <div class="narr-line" id="n4">Nothing had changed.</div>
+  <div class="narr-line" id="n5">And somehow...<br>everything had.</div>
+
+  <!-- الجزء الثالث -->
+  <div class="narr-line" id="n6">We talked...</div>
+  <div class="narr-line" id="n7">about everything...</div>
+  <div class="narr-line" id="n8">and nothing.</div>
+
+  <!-- الجزء الرابع -->
+  <div class="narr-line" id="n9">Sometimes...</div>
+  <div class="narr-line" id="n10">we just walked.</div>
+  <div class="narr-line" id="n11">Neither of us...<br>needed to fill the silence.</div>
+
+  <!-- الجزء الخامس — الكلمة التى تحمل المشهد كله، تبقى وحدها لفترة طويلة عمدًا -->
+  <div class="narr-line" id="n12">It wasn't exciting.</div>
+  <div class="narr-line" id="n13">It wasn't extraordinary.</div>
+  <div class="narr-line" id="n14">It was...</div>
+  <div class="narr-line em" id="n15">comfortable.</div>
+
+  <!-- الجزء السادس والأخير -->
+  <div class="narr-line" id="n16">For the first time...</div>
+  <div class="narr-line" id="n17">I wasn't thinking...<br>about the future.</div>
+  <div class="narr-line" id="n18">I simply...</div>
+  <div class="narr-line em" id="n19">was.</div>
+
+</div>
+
+<style>
+  /* كل شيء هنا محلي لهذا المشهد فقط — لا لمسة لأي ملف عام */
+
+  #s11Content { height: 100vh; height: 100dvh; }
+
+  .fullbleed-wrap {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: #0A0808;
+  }
+  .fullbleed-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.0);
+    transform-origin: 50% 50%;
+    will-change: opacity, transform;
+  }
+
+  /* ستارة سفلية خفيفة جدًا — أُنقصت كثيرًا عن النسخة السابقة، فقط لضمان قراءة النص */
+  .scrim {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.06) 30%, transparent 55%);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .local-date-card {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 0;
+    z-index: 3;
+  }
+  .local-date-stack {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300;
+    color: #D4B28C;
+    direction: ltr; line-height: 1.4;
+    margin-bottom: 1rem;
+  }
+  .local-location-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem; font-weight: 300;
+    color: #b8a082;
+    letter-spacing: 0.05em; direction: ltr;
+  }
+
+  /* الجمل الصامتة — نفس روح .silence-line المستخدمة فى بقية الفيلم */
+  .narr-line {
+    position: absolute;
+    left: 50%; bottom: 13%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 640px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.35rem, 3.6vw, 2.1rem);
+    font-weight: 300;
+    color: #F2E9E4;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    opacity: 0;
+    white-space: pre-line;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+    z-index: 3;
+  }
+  /* "comfortable." و"was." — تُتركان وحدهما، بنفس معاملة "You." فى Scene05 */
+  .narr-line.em {
+    font-size: clamp(2rem, 5.6vw, 3.1rem);
+    color: #D4B28C;
+    letter-spacing: 0.06em;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.65);
+  }
+</style>
+
+<script>
+  (function() {
+    // ============================================================
+    // Scene11 — Second Date · Director's Polish Pass.
+    //
+    // This is not a new scene. It's the same scene, made more patient.
+    // One photograph. One almost-invisible push-in. Long silences.
+    // The soundtrack — "A Model of the Universe" — is already playing,
+    // handed off seamlessly from Scene10. It is never touched here:
+    // no play(), no stop(), no fade, no seek, nothing on AudioManager.
+    // This scene exists entirely inside music that has already begun,
+    // and it ends by dissolving quietly back into it.
+    // ============================================================
+
+    // لا يوجد Scene12 بعد — لا نحاول تحميله مسبقًا حتى لا نسبب خطأ شبكة صامتًا فى الكونسول.
+    // عند إنشائه لاحقًا، يكفي إضافة Transition.preload('scenes/scene12.html') هنا،
+    // ثم استبدال onComplete فى نهاية هذا الملف باستدعاء Transition.loadScene الحقيقي.
+
+    (new Image()).src = 'assets/images/second-date.jpg';
+
+    const tl = gsap.timeline({ delay: 0.6, defaults: { ease: 'power2.inOut' } });
+
+    // --- بطاقة التاريخ المحلية أولاً، فى سواد كامل قبل أي صورة ---
+    tl.to('#dateCard11', { opacity: 1, duration: 1.8 }, '+=0.5');
+    tl.to('#dateCard11', { opacity: 0, duration: 1.6 }, '+=2.6');
+
+    // --- سواد قصير بعد اختفاء البطاقة، قبل ظهور الصورة ---
+    tl.to({}, { duration: 1.2 });
+
+    // --- الصورة الوحيدة: ظهور بطيء، ثم لا تتغير مرة أخرى حتى نهاية المشهد ---
+    tl.to('#fbImg', { opacity: 1, duration: 3.8 }, '+=0.2');
+
+    // --- دفعة التكبير الوحيدة فى المشهد كله: 1.00 → 1.035 على مدى كل شىء تقريبًا،
+    //     بلا Ease، بلا تسارع، بلا أى شعور بحركة كاميرا — مجرد نبض حياة هادئ جدًا ---
+    tl.to('#fbImg', { scale: 1.035, duration: 96, ease: 'none' }, '<');
+
+    // --- اللحظة الأولى: لا شىء يحدث لمدة 5 ثوانٍ تقريبًا. لا نص، لا صوت جديد،
+    //     فقط الصورة والموسيقى. دع الجمهور يستقر داخل اللحظة قبل أى كلمة ---
+    tl.to({}, { duration: 5 });
+
+    // === PART 1 ===
+    tl.to('#n1', { opacity: 1, duration: 1.6 }, '+=0.3');
+    tl.to('#n1', { opacity: 0, duration: 1.2 }, '+=2.4');
+
+    tl.to('#n2', { opacity: 1, duration: 1.8 }, '+=1.5');
+    tl.to('#n2', { opacity: 0, duration: 1.4 }, '+=3.2');
+
+    tl.to('#n3', { opacity: 1, duration: 1.8 }, '+=2.2');
+    tl.to('#n3', { opacity: 0, duration: 1.4 }, '+=3.2');
+
+    tl.to({}, { duration: 2.5 });
+
+    // === PART 2 ===
+    tl.to('#n4', { opacity: 1, duration: 1.6 }, '+=0.5');
+    tl.to('#n4', { opacity: 0, duration: 1.2 }, '+=2.4');
+
+    tl.to('#n5', { opacity: 1, duration: 1.8 }, '+=1.4');
+    tl.to('#n5', { opacity: 0, duration: 1.4 }, '+=3.4');
+
+    tl.to({}, { duration: 2.5 });
+
+    // === PART 3 ===
+    tl.to('#n6', { opacity: 1, duration: 1.5 }, '+=0.4');
+    tl.to('#n6', { opacity: 0, duration: 1.1 }, '+=1.8');
+
+    tl.to('#n7', { opacity: 1, duration: 1.4 }, '+=1');
+    tl.to('#n7', { opacity: 0, duration: 1 }, '+=1.6');
+
+    tl.to('#n8', { opacity: 1, duration: 1.6 }, '+=1');
+    tl.to('#n8', { opacity: 0, duration: 1.3 }, '+=2.8');
+
+    tl.to({}, { duration: 2.5 });
+
+    // === PART 4 ===
+    tl.to('#n9', { opacity: 1, duration: 1.4 }, '+=0.5');
+    tl.to('#n9', { opacity: 0, duration: 1 }, '+=1.6');
+
+    tl.to('#n10', { opacity: 1, duration: 1.5 }, '+=0.9');
+    tl.to('#n10', { opacity: 0, duration: 1.1 }, '+=2');
+
+    tl.to('#n11', { opacity: 1, duration: 1.8 }, '+=1.8');
+    tl.to('#n11', { opacity: 0, duration: 1.5 }, '+=3.6');
+
+    tl.to({}, { duration: 3 });
+
+    // === PART 5 — "comfortable." يستحق أطول وقفة فى المشهد كله ===
+    tl.to('#n12', { opacity: 1, duration: 1.6 }, '+=0.5');
+    tl.to('#n12', { opacity: 0, duration: 1.2 }, '+=2');
+
+    tl.to('#n13', { opacity: 1, duration: 1.6 }, '+=1');
+    tl.to('#n13', { opacity: 0, duration: 1.2 }, '+=2.2');
+
+    tl.to('#n14', { opacity: 1, duration: 1.6 }, '+=1.8');
+    tl.to('#n14', { opacity: 0, duration: 1 }, '+=1.6');
+
+    // --- "comfortable." — بلا حركة، بلا مؤثرات، بلا أى تصعيد فى الموسيقى.
+    //     تبقى معلّقة على الشاشة نحو 8-10 ثوانٍ، ثم تختفى ببطء شديد ---
+    tl.to('#n15', { opacity: 1, duration: 2.4 }, '+=1.2');
+    tl.to('#n15', { opacity: 0, duration: 2 }, '+=8.5');
+
+    tl.to({}, { duration: 3 });
+
+    // === PART 6 — الإغلاق: "I simply... was." ثم الصورة وحدها ===
+    tl.to('#n16', { opacity: 1, duration: 1.5 }, '+=0.5');
+    tl.to('#n16', { opacity: 0, duration: 1.1 }, '+=1.8');
+
+    tl.to('#n17', { opacity: 1, duration: 1.8 }, '+=1');
+    tl.to('#n17', { opacity: 0, duration: 1.4 }, '+=3');
+
+    tl.to('#n18', { opacity: 1, duration: 1.8 }, '+=1.6');
+    tl.to('#n18', { opacity: 0, duration: 1.2 }, '+=1.8');
+
+    // --- "was." — تبقى وحدها لحظة قبل أن تتلاشى ---
+    tl.to('#n19', { opacity: 1, duration: 2 }, '+=1.2');
+    tl.to('#n19', { opacity: 0, duration: 1.8 }, '+=3.5');
+
+    // --- الصورة تبقى وحدها تمامًا، بلا نص، بلا واجهة، بلا أى انتقال —
+    //     فقط الصورة والموسيقى تتنفسان معًا لمدة طويلة نسبيًا ---
+    tl.to({}, { duration: 13 });
+
+    // --- ذوبان شديد البطء إلى السواد — الصورة فقط، الموسيقى مستمرة بلا أى لمسة ---
+    tl.to('#fbImg', { opacity: 0, duration: 5.5, ease: 'power2.in' }, '+=0.3');
+
+    // --- سكون كامل على السواد، الموسيقى وحدها تُسمع لعدة ثوانٍ إضافية ---
+    tl.to({}, { duration: 5 });
+
+    // ============================================================
+    // Scene12 لم يُنشأ بعد. عند إنشائه، استبدل الكتلة التالية بـ:
+    //   Transition.preload('scenes/scene12.html');  (أعلى الملف)
+    //   Transition.loadScene('scenes/scene12.html', container);
+    // الموسيقى تكمل بلا انقطاع لأننا لا نلمس AudioManager هنا إطلاقًا —
+    // المشهد ينتهى وكأنه ذاب فى الذاكرة، لا وكأنه توقف فجأة.
+    // ============================================================
+    tl.call(() => {
+      // نهاية المشهد الحالي: نبقي السواد والموسيقى كما هما، فى انتظار Scene12
+    });
+  })();
+</script>

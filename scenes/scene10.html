@@ -501,9 +501,57 @@ function onEnd(){
     G('end').classList.add('on');
     setTimeout(()=>{G('en').classList.add('on');
       setTimeout(()=>{G('em').classList.add('on');
-        setTimeout(()=>G('end').classList.add('crt'),9000);
+        setTimeout(()=>{
+          G('end').classList.add('crt');
+          setTimeout(finishAndTransition,700);
+        },9000);
       },2600);},600);
   },3400);
+}
+
+/* ══ HANDOFF TO SCENE11 — "Second Date" ══
+   Everything above this line is the confession exactly as it always was —
+   nothing about it is touched. This only decides what happens once the
+   confession has fully finished playing itself out on its own: real
+   silence, one last blinking cursor, then a slow, uneventful fade to
+   black that carries us into the next memory. No flashes, no drama,
+   no restart of anything already in motion. */
+function finishAndTransition(){
+  const container=G('sceneContainer');
+  if(!container){return;}
+
+  const blackout=document.createElement('div');
+  blackout.id='confessionBlackout';
+  blackout.style.cssText='position:fixed;inset:0;z-index:1000;background:#00000a;opacity:0;transition:opacity 2s ease;pointer-events:none;';
+  container.appendChild(blackout);
+
+  // a few seconds of true stillness — no text, no sound, no movement,
+  // just the last blinking cursor from the "em" line fading out on its own
+  setTimeout(()=>{
+    // one smooth ~2s fade to black
+    blackout.style.opacity='1';
+
+    setTimeout(()=>{
+      // hold the black screen for about a second before anything begins
+      setTimeout(()=>{
+        // "A Model of the Universe" begins here, emerging almost
+        // inaudibly from silence — same AudioManager, no duplicate audio
+        if(typeof AudioManager!=='undefined'){
+          AudioManager.playGradualStart('a-model-of-the-universe',0.015,0.07,12000);
+        }
+
+        Transition.showDateCard({
+          day:'10',
+          month:'June',
+          year:'2026',
+          location1:'Second Date'
+        },()=>{
+          // the soundtrack keeps playing, uninterrupted, straight into Scene11
+          Transition.loadScene('scenes/scene11.html',container);
+        });
+      },1000);
+    },2000);
+  },2500);
 }
 
 /* ══ STATUS CYCLE ══ */
