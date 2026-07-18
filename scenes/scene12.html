@@ -1,0 +1,351 @@
+<div class="scene-content scene12-confession" id="s12Content">
+
+  <!-- بطاقة تاريخ محلية لهذا المشهد — نفس اللغة البصرية لبطاقة الانتقال الرئيسية ونفس معاملة
+       "الزمالك" فى Scene10/Scene11 للنص العربي (Aref Ruqaa، RTL)، لكنها هنا عنصر داخل المشهد
+       نفسه، ولا تُشغّل أى انتقال ولا تلمس sceneContainer -->
+  <div class="local-date-card" id="dateCard">
+    <div class="local-date-stack">8<br>July<br>2026</div>
+    <div class="local-location-text" dir="rtl" lang="ar">الماظة</div>
+  </div>
+
+  <!-- ============ الافتتاح — يوم عادى، لا شىء يوحى بما هو قادم ============ -->
+  <div class="silence-line" id="o1">That day...<br>felt like any other day.</div>
+  <div class="silence-line" id="o2">I had just finished work.</div>
+  <div class="silence-line" id="o3">You were waiting for me...<br>in <span dir="rtl" lang="ar">الماظة</span>.</div>
+  <div class="silence-line" id="o4">I only wanted...<br>to see you for a few minutes.</div>
+
+  <!-- ============ الوسط — لا احتفال، لا مناسبة، فقط دقائق مسروقة ============ -->
+  <div class="silence-line" id="m1">We weren't celebrating anything.</div>
+  <div class="silence-line" id="m2">There wasn't a special occasion.</div>
+  <div class="silence-line" id="m3">No plans.</div>
+  <div class="silence-line" id="m4">No expectations.</div>
+  <div class="silence-line" id="m5">Just...<br>a few stolen minutes together.</div>
+
+  <!-- ============ التأمل — الإدراك الهادئ قبل اللحظة ============ -->
+  <div class="silence-line" id="r1">Sometimes...</div>
+  <div class="silence-line" id="r2">the smallest moments...</div>
+  <div class="silence-line" id="r3">become the biggest memories.</div>
+
+  <!-- ============ الاعتراف — ذروة المشهد كله ============ -->
+  <div class="silence-line" id="c1">Then...</div>
+  <div class="silence-line" id="c2">You looked at me.</div>
+  <div class="silence-line" id="c3">You smiled.</div>
+  <div class="silence-line" id="c4">Then you said...</div>
+  <div class="silence-line confession-line" id="c5">"I love you."</div>
+
+  <!-- ============ ما بعد — الهدوء الذى يعقب اللحظة ============ -->
+  <div class="silence-line" id="a1">Everything changed.</div>
+  <div class="silence-line" id="a2">Not because we became something new...</div>
+  <div class="silence-line" id="a3">But because...</div>
+  <div class="silence-line" id="a4">we finally became...</div>
+  <div class="silence-line em" id="a5">us.</div>
+  <div class="silence-line" id="a6">That night...</div>
+  <div class="silence-line" id="a7">I walked away...<br>with the happiest heart<br>I had ever known.</div>
+
+  <!-- ============ الصورة — كرت المعايدة الذى كتبته هى. أول مرة نرى القصة من عينيها ============ -->
+  <div class="memory-photo-stage" aria-hidden="true">
+    <figure class="memory-photo-frame" id="cardFrame">
+      <img
+        src="assets/images/greeting-card.jpeg"
+        alt=""
+        class="memory-photo"
+        onerror="this.closest('.memory-photo-frame').style.display='none';"
+      >
+    </figure>
+  </div>
+
+  <!-- ============ التعليق الختامى — تحت الكرت، بعد أن يُتاح للجمهور وقت كافٍ لقراءته ============ -->
+  <div class="silence-line caption-line" id="cap1">I never needed<br>to read it twice.<br><br>Because I already knew...<br>every word was real.</div>
+
+</div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap');
+
+  #s12Content {
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    height: 100dvh;
+    padding: 0;
+    overflow: hidden;
+    background: #0A0808;
+  }
+
+  /* بطاقة التاريخ المحلية — نفس تصميم الكارد الرئيسى فى index.html */
+  .local-date-card {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 0;
+    z-index: 3;
+  }
+  .local-date-stack {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300;
+    color: #D4B28C;
+    direction: ltr; line-height: 1.4;
+    margin-bottom: 1rem;
+  }
+  .local-location-text {
+    font-family: 'Aref Ruqaa', 'IBM Plex Sans Arabic', 'Alexandria', 'Inter', sans-serif;
+    font-size: 1.38rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: #b8a082;
+    line-height: 1.6;
+  }
+
+  /* نفس مكوّن .silence-line المستخدم حرفيًا فى Scene04/Scene05/Scene07/Scene08/Scene09،
+     بلا أى تعديل على تصميمه الأساسى */
+  .silence-line {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 640px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 4vw, 2.3rem);
+    font-weight: 300;
+    color: #F2E9E4;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    opacity: 0;
+    white-space: pre-line;
+    z-index: 2;
+  }
+
+  /* "I love you." — يستحق أكثر من أى سطر آخر فى الفيلم كله. لا صراخ، فقط دفء أكبر قليلاً */
+  .confession-line {
+    font-size: clamp(1.9rem, 5vw, 3rem);
+    font-style: italic;
+    color: #F2E9E4;
+    text-shadow: 0 0 26px rgba(212,178,140,0.35);
+  }
+
+  /* "us." — نفس المعاملة التى نالتها "You." فى Scene05 و"for you." فى Scene09 */
+  .silence-line.em {
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    color: #D4B28C;
+    letter-spacing: 0.06em;
+  }
+
+  /* الكرت — نفس لغة الإطار المستخدمة فى Scene11 لصورة الموعد الثانى، لكن بلمسة كرت ورقى دافئة */
+  .memory-photo-stage {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    background: #0A0808;
+  }
+
+  .memory-photo-frame {
+    width: min(62vw, 620px);
+    max-width: calc(100vw - 4rem);
+    max-height: 66vh;
+    margin: 0;
+    padding: clamp(10px, 1.4vw, 16px);
+    padding-bottom: clamp(26px, 3.4vw, 40px);
+    background: #f2ece2;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    border-radius: 2px;
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.64),
+      0 0 0 1px rgba(212, 178, 140, 0.1);
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  .memory-photo {
+    display: block;
+    width: 100%;
+    max-height: min(52vh, 500px);
+    object-fit: contain;
+    background: #111;
+  }
+
+  /* التعليق الختامى — يجلس أسفل الكرت، لا يغطيه أبدًا */
+  .caption-line {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(72vw, 640px);
+
+      font-size: clamp(1.25rem, 3vw, 1.7rem);
+      line-height: 1.7;
+      color: #d9cfc4;
+  }
+
+  @media (max-width: 640px) {
+    .memory-photo-frame {
+      width: min(84vw, 480px);
+      max-width: calc(100vw - 2rem);
+      max-height: 56vh;
+    }
+    .memory-photo {
+      max-height: 42vh;
+    }
+    .silence-line {
+      width: 84vw;
+      font-size: clamp(1.25rem, 6vw, 1.85rem);
+      line-height: 1.5;
+    }
+    .caption-line {
+      bottom: 6vh;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    // ============================================================
+    // Scene12 — The Day Everything Changed.
+    // Music cue: "Scary Love" — begins almost silently and rises very
+    // slowly, exactly like Scene11's opening. No restart, no crossfade,
+    // no sudden volume jump, anywhere in this scene.
+    //
+    // This scene ends on black. It does NOT auto-load the Epilogue —
+    // that hand-off belongs to whatever calls this scene next.
+    // ============================================================
+
+    const NEXT_SCENE_URL = 'scenes/scene13.html';
+    const MUSIC_FADE_IN_MS = 30000;
+
+    (new Image()).src = 'assets/images/greeting-card.jpeg';
+
+    // تحميل صامت للمشهد التالى فقط — بلا أى انتقال تلقائى إليه من هنا
+    if (typeof Transition !== 'undefined') {
+      Transition.preload(NEXT_SCENE_URL).catch(() => {});
+    }
+
+    const tl = gsap.timeline({
+      delay: 0.8,
+      defaults: { ease: 'power2.inOut' }
+    });
+
+    function rest(duration) {
+      tl.to({}, { duration });
+    }
+
+    function say(selector, hold, gap, fadeIn, fadeOut) {
+      tl.to(selector, { opacity: 1, duration: fadeIn }, `+=${gap}`);
+      tl.to(selector, { opacity: 0, duration: fadeOut }, `+=${hold}`);
+    }
+
+    // --- سواد كامل قبل أى شىء — عدة ثوانٍ من الصمت الحقيقى ---
+    rest(3.5);
+
+    // --- بطاقة التاريخ المحلية ---
+    tl.to('#dateCard', { opacity: 1, duration: 2 }, '+=0.3');
+    tl.to('#dateCard', { opacity: 0, duration: 1.8 }, '+=3');
+
+    rest(1.6);
+
+    // === الافتتاح — يوم عادى تمامًا ===
+    say('#o1', 3.2, 0.4, 1.8, 1.4);
+    say('#o2', 2.8, 1.4, 1.6, 1.3);
+    say('#o3', 3.4, 1.4, 1.7, 1.4);
+    say('#o4', 3.6, 1.5, 1.8, 1.5);
+
+    rest(2.2);
+
+    // === الوسط — لا مناسبة، لا خطة ===
+    say('#m1', 2.6, 0.3, 1.5, 1.2);
+    say('#m2', 2.6, 1.2, 1.5, 1.2);
+    say('#m3', 2.2, 1.2, 1.3, 1);
+    say('#m4', 2.4, 1.2, 1.3, 1);
+    say('#m5', 3.6, 1.4, 1.7, 1.4);
+
+    rest(2.6);
+
+    // === التأمل — الإدراك الهادئ ===
+    say('#r1', 2.2, 0.4, 1.5, 1.1);
+    say('#r2', 2.4, 1.3, 1.5, 1.1);
+    say('#r3', 3.8, 1.4, 1.7, 1.4);
+
+    // --- سواد طويل قبل الاعتراف — هذا هو التحضير للذروة ---
+    rest(3.8);
+
+    // === الاعتراف ===
+    say('#c1', 2.4, 0.4, 1.6, 1.2);
+    say('#c2', 2.6, 1.4, 1.6, 1.2);
+    say('#c3', 2.6, 1.4, 1.6, 1.2);
+    say('#c4', 3, 1.5, 1.7, 1.3);
+
+    rest(1.8);
+
+    // --- "I love you." — تُترك على الشاشة أطول من أى سطر آخر فى الفيلم كله ---
+    tl.to('#c5', { opacity: 1, duration: 2.6 }, '+=1.2');
+    tl.to('#c5', { opacity: 0, duration: 2.4 }, '+=6.5');
+
+    // --- سواد طويل بعد اللحظة، قبل أى كلمة أخرى ---
+    rest(3.5);
+
+    // === ما بعد ===
+    say('#a1', 2.6, 0.4, 1.6, 1.2);
+    say('#a2', 3, 1.4, 1.6, 1.3);
+    say('#a3', 2, 1.3, 1.3, 1);
+    say('#a4', 2, 1, 1.3, 1);
+
+    // --- "us." — نفس معاملة الكلمات المفردة الكبرى فى الفيلم ---
+    tl.to('#a5', { opacity: 1, duration: 2.2 }, '+=1');
+    tl.to('#a5', { opacity: 0, duration: 1.8 }, '+=3.6');
+
+    rest(2.4);
+
+    say('#a6', 2.4, 0.4, 1.6, 1.2);
+    say('#a7', 5, 1.2, 1.8, 1.5);
+
+    // --- سواد قبل ظهور الكرت — الصورة يجب ألا تظهر قبل اكتمال كل الكلام ---
+    rest(3.2);
+
+    // === الكرت — لا استعجال، تكبير خفيف جدًا وممتد طوال بقائه ===
+    tl.to('#cardFrame', { opacity: 1, duration: 3.2 });
+    tl.to('#cardFrame', { scale: 1.035, duration: 26, ease: 'none' }, '<');
+
+    // الكرت يظل وحده ليُقرأ بالكامل
+    rest(14);
+
+    // اختفاء الكرت
+    tl.to('#cardFrame', {
+      opacity: 0,
+      duration: 3,
+      ease: 'power2.in'
+    });
+
+    // لحظة صمت بعد اختفاء الكرت
+    rest(1.5);
+
+    // الرسالة الأخيرة تظهر وحدها على الشاشة
+    tl.to('#cap1', {
+      opacity: 1,
+      duration: 2.2
+    });
+
+    rest(7);
+
+    tl.to('#cap1', {
+      opacity: 0,
+      duration: 2
+    });
+
+    // --- الموسيقى تنخفض بهدوء شديد مع السواد الأخير، بلا توقف مفاجئ ---
+    tl.call(() => {
+      if (typeof AudioManager !== 'undefined') {
+        AudioManager.fadeTo(0.015, 8000);
+      }
+    }, null, '<');
+
+    // --- سواد كامل نهائى — المشهد ينتهى هنا، بلا انتقال إلى الـ Epilogue ---
+    rest(6);
+
+    tl.eventCallback('onStart', () => {
+      if (typeof AudioManager === 'undefined') return;
+      AudioManager.playGradualStart('Scary Love', 0.001, 0.055, MUSIC_FADE_IN_MS);
+    });
+  })();
+</script>
