@@ -6,6 +6,7 @@
 <title>LOVE.EXE — For Maryam</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap');
 
 :root{
   --r:#ff0040;--p:#ff3575;--rose:#ff80aa;
@@ -104,6 +105,16 @@ html,body{width:100%;height:100%;background:var(--bg);overflow:hidden;font-famil
 }
 #start-btn:hover{color:#fff;border-color:var(--p);box-shadow:0 0 30px rgba(255,53,117,.35);background:rgba(255,0,64,.1);}
 #start-hint{font-size:9px;letter-spacing:2px;color:rgba(255,53,117,.28);margin-top:14px;}
+
+#transitionInfo.scene11-zamalek-card .location-text{
+  font-family:'Aref Ruqaa','IBM Plex Sans Arabic','Alexandria','Inter',sans-serif;
+  font-size:1.38rem;
+  font-weight:400;
+  letter-spacing:0;
+  direction:rtl;
+  color:#D4B28C;
+  line-height:1.6;
+}
 
 /* ── Ending ── */
 #end{position:fixed;inset:0;z-index:15;display:flex;flex-direction:column;
@@ -509,13 +520,12 @@ function onEnd(){
   },3400);
 }
 
-/* ══ HANDOFF TO SCENE11 — "Second Date" ══
+/* ══ HANDOFF TO SCENE11 — Zamalek ══
    Everything above this line is the confession exactly as it always was —
    nothing about it is touched. This only decides what happens once the
    confession has fully finished playing itself out on its own: real
    silence, one last blinking cursor, then a slow, uneventful fade to
-   black that carries us into the next memory. No flashes, no drama,
-   no restart of anything already in motion. */
+   black and a date card. Scene11 owns the first music cue. */
 function finishAndTransition(){
   const container=G('sceneContainer');
   if(!container){return;}
@@ -534,19 +544,16 @@ function finishAndTransition(){
     setTimeout(()=>{
       // hold the black screen for about a second before anything begins
       setTimeout(()=>{
-        // "A Model of the Universe" begins here, emerging almost
-        // inaudibly from silence — same AudioManager, no duplicate audio
-        if(typeof AudioManager!=='undefined'){
-          AudioManager.playGradualStart('a-model-of-the-universe',0.015,0.07,12000);
-        }
+        const transitionCard=G('transitionInfo');
+        if(transitionCard){transitionCard.classList.add('scene11-zamalek-card');}
 
         Transition.showDateCard({
           day:'10',
           month:'June',
           year:'2026',
-          location1:'Second Date'
+          location1:'الزمالك'
         },()=>{
-          // the soundtrack keeps playing, uninterrupted, straight into Scene11
+          if(transitionCard){transitionCard.classList.remove('scene11-zamalek-card');}
           Transition.loadScene('scenes/scene11.html',container);
         });
       },1000);
