@@ -1,0 +1,345 @@
+<div class="scene-content" style="justify-content: center; background:#000;">
+
+  <!-- ============================================================
+       Scene13 — Epilogue.
+       Not another memory. This is peace, reflection, gratitude, hope.
+       Almost entirely black. Silence is part of the design.
+       Reuses the exact same .silence-line component used verbatim in
+       Scene04/05/07/08/09/12 — no redesign, only continuation.
+       This is the final scene of the film. No next scene is loaded.
+       ============================================================ -->
+
+  <!-- ============ Opening — the title, alone ============ -->
+  <div class="silence-line title-line" id="ep-title">Epilogue</div>
+
+  <!-- ============ Part 1 — nothing was wasted ============ -->
+  <div class="silence-line" id="n1">Looking back now...</div>
+  <div class="silence-line" id="n2">I don't think</div>
+  <div class="silence-line" id="n3">we ever met by chance.</div>
+  <div class="silence-line" id="n4">Nothing was late.</div>
+  <div class="silence-line" id="n5">Nothing was early.</div>
+  <div class="silence-line" id="n6">Nothing was wasted.</div>
+
+  <div class="silence-line" id="n7">Every goodbye...</div>
+  <div class="silence-line" id="n8">Every silence...</div>
+  <div class="silence-line" id="n9">Every year...</div>
+  <div class="silence-line" id="n10">Every prayer...</div>
+  <div class="silence-line" id="n11">was quietly leading us...</div>
+  <div class="silence-line" id="n12">to each other.</div>
+
+  <!-- ============ Central Message — the heart of the whole film ============ -->
+  <div class="silence-line" id="c1">Maybe...</div>
+  <div class="silence-line em" id="c2">God wasn't keeping us apart.</div>
+  <div class="silence-line em" id="c3">He was preparing us.</div>
+
+  <div class="silence-line" id="c4">Preparing you...</div>
+  <div class="silence-line" id="c5">Preparing me...</div>
+  <div class="silence-line" id="c6">Until the day...</div>
+  <div class="silence-line" id="c7">we were finally ready.</div>
+
+  <!-- ============ Future — minimal monochrome icons, one at a time ============ -->
+  <div class="future-item" id="f1"><div class="future-icon">💍</div><div class="future-text">Our engagement.</div></div>
+  <div class="future-item" id="f2"><div class="future-icon">🏡</div><div class="future-text">Our first home.</div></div>
+  <div class="future-item" id="f3"><div class="future-icon">💒</div><div class="future-text">Our wedding.</div></div>
+  <div class="future-item" id="f4"><div class="future-icon">✈️</div><div class="future-text">Japan.</div></div>
+  <div class="future-item" id="f5a"><div class="future-icon">👶</div><div class="future-text">The first little person...</div></div>
+  <div class="silence-line" id="f5b">who will call us</div>
+  <div class="silence-line" id="f5c">Mom...</div>
+  <div class="silence-line" id="f5d">and Dad.</div>
+
+  <!-- ============ Reflection ============ -->
+  <div class="silence-line" id="r1">And one day...</div>
+  <div class="silence-line" id="r2">We'll probably</div>
+  <div class="silence-line" id="r3">watch this together.</div>
+  <div class="silence-line" id="r4">Smiling...</div>
+  <div class="silence-line" id="r5">Because...</div>
+  <div class="silence-line" id="r6">every dream...</div>
+  <div class="silence-line" id="r7">became</div>
+  <div class="silence-line" id="r8">a memory.</div>
+
+  <!-- ============ Final Love Letter ============ -->
+  <div class="silence-line letter-line" id="ll1">Maryam...</div>
+
+  <div class="silence-line letter-line" id="ll2">I don't love you...</div>
+  <div class="silence-line letter-line" id="ll3">because of</div>
+  <div class="silence-line letter-line" id="ll4">what you've done.</div>
+
+  <div class="silence-line letter-line" id="ll5">I don't love you...</div>
+  <div class="silence-line letter-line" id="ll6">because of</div>
+  <div class="silence-line letter-line" id="ll7">what you gave me.</div>
+
+  <div class="silence-line letter-line em" id="ll8">I love you...</div>
+  <div class="silence-line letter-line" id="ll9">because...</div>
+  <div class="silence-line letter-line em" id="ll10">you are you.</div>
+
+  <!-- ============ Final Frame ============ -->
+  <div class="final-frame" id="finalFrame">
+    <div class="final-title" id="finalTitle">It was always you.</div>
+    <div class="dedication" id="dedication">For Maryam.<br>With all my love.</div>
+  </div>
+
+</div>
+
+<style>
+  /* نفس مكوّن .silence-line المستخدم حرفيًا فى كل مشاهد الفيلم — بلا أى تعديل على تصميمه الأساسى */
+  .silence-line {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 640px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 4vw, 2.3rem);
+    font-weight: 300;
+    color: #F2E9E4;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    opacity: 0;
+    white-space: pre-line;
+  }
+  /* نفس معاملة الكلمات/الجمل المحورية المستخدمة فى "You." (Scene05)، "for you." (Scene09)، "us." (Scene12) */
+  .silence-line.em {
+    font-size: clamp(2rem, 5.4vw, 3rem);
+    color: #D4B28C;
+    letter-spacing: 0.05em;
+  }
+
+  .title-line {
+    font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+    color: #b8a082;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+
+  /* رسالة الحب الأخيرة — نفس لغة .silence-line، بلمسة أدفأ قليلاً كأنها كلمات مكتوبة بخط اليد */
+  .letter-line {
+    font-style: italic;
+    color: #f0e6da;
+  }
+
+  /* أيقونات المستقبل — أحادية اللون، هادئة تمامًا، بلا ألوان زاهية */
+  .future-item {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    opacity: 0;
+  }
+  .future-icon {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    line-height: 1;
+    margin-bottom: 0.9rem;
+    filter: grayscale(1) brightness(1.6) contrast(0.9);
+    opacity: 0.85;
+  }
+  .future-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.3rem, 3.4vw, 1.9rem);
+    font-weight: 300;
+    color: #F2E9E4;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    white-space: pre-line;
+  }
+
+  /* الإطار الأخير — "It was always you." تبقى ثابتة، بلا حركة، بلا تحريك */
+  .final-frame {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 640px;
+    text-align: center;
+    opacity: 0;
+  }
+  .final-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4.6vw, 2.9rem);
+    font-weight: 300;
+    color: #F2E9E4;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+  }
+  /* التوقيع — سطر أصغر تحت العنوان، كأنه توقيع مكتوب بخط اليد، لا سرد جديد */
+  .dedication {
+    margin-top: 1.6rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    color: rgba(212,178,140,0.65);
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+    opacity: 0;
+  }
+</style>
+
+<script>
+  (function() {
+    // ============================================================
+    // Scene13 — Epilogue. The final scene of the film.
+    //
+    // Music: no new soundtrack. The exact same "threshold" theme used
+    // at the very beginning returns here — almost inaudible, fading in
+    // extremely slowly, so the audience subconsciously feels the story
+    // has completed a full circle. No restart cut, no crossfade.
+    //
+    // There is no next scene. This timeline ends the film in black.
+    // ============================================================
+
+    const tl = gsap.timeline({ delay: 1, defaults: { ease: 'power2.inOut' } });
+
+    function rest(duration) {
+      tl.to({}, { duration });
+    }
+
+    function say(selector, hold, gap, fadeIn, fadeOut) {
+      tl.to(selector, { opacity: 1, duration: fadeIn }, `+=${gap}`);
+      tl.to(selector, { opacity: 0, duration: fadeOut }, `+=${hold}`);
+    }
+
+    // --- سواد كامل وسكون تام قبل أى شىء — الموسيقى بالكاد تُسمع فى بدايتها ---
+    rest(4.5);
+
+    // === العنوان — Epilogue، وحده، بلا شىء آخر ===
+    tl.to('#ep-title', { opacity: 1, duration: 2.2 }, '+=0.5');
+    tl.to('#ep-title', { opacity: 0, duration: 1.8 }, '+=3');
+
+    rest(2.8);
+
+    // === الجزء الأول — لم يكن هناك شىء بلا معنى ===
+    say('#n1', 2.6, 0.4, 1.7, 1.3);
+    say('#n2', 1.8, 1.3, 1.4, 1);
+    say('#n3', 2.8, 0.9, 1.5, 1.3);
+
+    rest(1.8);
+
+    say('#n4', 2.2, 0.4, 1.5, 1.1);
+    say('#n5', 2.2, 1.3, 1.5, 1.1);
+    say('#n6', 3, 1.3, 1.6, 1.4);
+
+    rest(2.4);
+
+    say('#n7', 1.8, 0.4, 1.3, 1);
+    say('#n8', 1.8, 1, 1.3, 1);
+    say('#n9', 1.8, 1, 1.3, 1);
+    say('#n10', 2, 1, 1.3, 1);
+    say('#n11', 2.4, 1.2, 1.5, 1.1);
+    say('#n12', 3, 1.2, 1.6, 1.4);
+
+    // --- سواد طويل قبل الفكرة المحورية للفيلم كله ---
+    rest(3.8);
+
+    // === Central Message ===
+    say('#c1', 2, 0.4, 1.5, 1.1);
+    tl.to('#c2', { opacity: 1, duration: 2.2 }, '+=1.2');
+    tl.to('#c2', { opacity: 0, duration: 1.8 }, '+=3.4');
+    tl.to('#c3', { opacity: 1, duration: 2.2 }, '+=1.4');
+    tl.to('#c3', { opacity: 0, duration: 1.8 }, '+=3.6');
+
+    rest(2.4);
+
+    say('#c4', 1.6, 0.3, 1.3, 1);
+    say('#c5', 1.6, 1, 1.3, 1);
+    say('#c6', 1.8, 1.1, 1.4, 1);
+    say('#c7', 2.8, 1.1, 1.6, 1.4);
+
+    // --- سواد قبل المستقبل ---
+    rest(3.2);
+
+    // === Future — icon by icon, quiet, monochrome, one at a time ===
+    say('#f1', 2.6, 0.4, 1.8, 1.4);
+    rest(1.2);
+    say('#f2', 2.6, 0.4, 1.8, 1.4);
+    rest(1.2);
+    say('#f3', 2.6, 0.4, 1.8, 1.4);
+    rest(1.2);
+    say('#f4', 2.4, 0.4, 1.8, 1.3);
+    rest(1.4);
+
+    say('#f5a', 1.8, 0.4, 1.8, 1.2);
+    say('#f5b', 1.6, 1, 1.4, 1);
+    say('#f5c', 2, 1.4, 1.5, 1.1);
+    say('#f5d', 2.4, 1.8, 1.6, 1.3);
+
+    // --- سواد قبل التأمل ---
+    rest(3);
+
+    // === Reflection ===
+    say('#r1', 1.8, 0.4, 1.4, 1);
+    say('#r2', 1.6, 1, 1.3, 1);
+    say('#r3', 2.4, 1, 1.5, 1.2);
+
+    rest(1.8);
+
+    say('#r4', 1.8, 0.4, 1.4, 1);
+    say('#r5', 1.4, 1, 1.2, 0.9);
+    say('#r6', 1.4, 0.9, 1.2, 0.9);
+    say('#r7', 1.4, 0.9, 1.2, 0.9);
+    say('#r8', 2.8, 1, 1.6, 1.4);
+
+    // --- سواد طويل قبل رسالة الحب الأخيرة ---
+    rest(4);
+
+    // === Final Love Letter ===
+    say('#ll1', 2.4, 0.5, 1.8, 1.3);
+
+    rest(1.5);
+
+    say('#ll2', 1.6, 0.4, 1.5, 1);
+    say('#ll3', 1.4, 1, 1.2, 0.9);
+    say('#ll4', 2.4, 1, 1.5, 1.4);
+
+    rest(1.8);
+
+    say('#ll5', 1.6, 0.4, 1.5, 1);
+    say('#ll6', 1.4, 1, 1.2, 0.9);
+    say('#ll7', 2.4, 1, 1.5, 1.4);
+
+    rest(2.2);
+
+    // --- "I love you..." وحدها لعدة ثوانٍ قبل أن تكتمل ---
+    tl.to('#ll8', { opacity: 1, duration: 2 }, '+=1');
+    tl.to('#ll8', { opacity: 0, duration: 1.6 }, '+=4.5');
+
+    say('#ll9', 1.4, 1, 1.3, 0.9);
+
+    tl.to('#ll10', { opacity: 1, duration: 2.4 }, '+=1');
+    tl.to('#ll10', { opacity: 0, duration: 2.2 }, '+=5.5');
+
+    // --- سواد كامل قبل الإطار الأخير ---
+    rest(4.5);
+
+    // === Final Frame — "It was always you." completely still ===
+    tl.to('#finalFrame', { opacity: 1, duration: 3 });
+
+    // تبقى على الشاشة لعشر ثوانٍ تقريبًا، بلا أى حركة، بلا أى تحريك
+    rest(6.5);
+
+    // --- التوقيع الصغير يظهر بهدوء قرب نهاية تلك الثوانى العشر ---
+    tl.to('#dedication', { opacity: 1, duration: 2.2 });
+
+    // --- الموسيقى تُترك تكمل بشكل طبيعى، بلا لمسة مفاجئة، بينما الإطار الأخير ما زال ظاهرًا ---
+    rest(6);
+
+    // --- سواد نهائى بطىء جدًا — لا نهاية مفاجئة، لا تلاشى موسيقى قسرى هنا، فقط ظلام يتسع ---
+    tl.to('#finalFrame', { opacity: 0, duration: 5, ease: 'power2.in' }, '+=1');
+
+    // --- سكون أخير على الشاشة السوداء — لا نص، لا واجهة، لا أزرار ---
+    rest(4);
+
+    tl.eventCallback('onStart', () => {
+      if (typeof AudioManager === 'undefined') return;
+      // نفس ثيم "Threshold" الذى افتتح الفيلم بالضبط — يعود هنا بصوت شبه معدوم
+      // ويتصاعد ببطء شديد جدًا على مدار الدقيقة الأولى من هذا المشهد، كأنه ذكرى تعود.
+      AudioManager.playGradualStart('threshold', 0.0008, 0.045, 42000);
+    });
+
+    // ملاحظة: لا يوجد Transition.loadScene هنا — هذا هو المشهد الأخير فى الفيلم.
+    // الموسيقى تُترك لتكمل طبيعيًا بنفسها بعد نهاية الخط الزمنى دون أى تدخل إضافى.
+  })();
+</script>

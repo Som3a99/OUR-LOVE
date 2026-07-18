@@ -214,6 +214,7 @@
 
     const NEXT_SCENE_URL = 'scenes/scene13.html';
     const MUSIC_FADE_IN_MS = 30000;
+    const FINAL_SILENCE_SECONDS = 2.5;
 
     (new Image()).src = 'assets/images/greeting-card.jpeg';
 
@@ -346,6 +347,18 @@
     tl.eventCallback('onStart', () => {
       if (typeof AudioManager === 'undefined') return;
       AudioManager.playGradualStart('Scary Love', 0.001, 0.055, MUSIC_FADE_IN_MS);
+    });
+
+    tl.call(() => {
+    const container = document.getElementById('sceneContainer');
+    if (!container || typeof Transition === 'undefined') return;
+
+    Transition.preload(NEXT_SCENE_URL)
+        .then((html) => {
+            if (typeof html !== 'string' || !html.includes('scene-content')) return;
+            Transition.loadScene(NEXT_SCENE_URL, container);
+        })
+        .catch(() => {});
     });
   })();
 </script>
